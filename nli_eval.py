@@ -1,7 +1,20 @@
 #!/usr/bin/env python3
 
+import json
+import torch
+
 from argparse import ArgumentParser
-from transformers import import RobertaTokenizer, RobertaForSequenceClassification
+from transformers import RobertaTokenizer, RobertaForSequenceClassification
+from tgen.data import DA
+
+from external.e2e_metrics_tsv import read_tsv
+from external.webnlg_entry import Entry, Triple
+
+
+TEMPLATE_PATHS = {
+    'e2e': 'fusenlg/data/e2e/templates_basic.json',
+    'webnlg': 'fusenlg/data/webnlg/templates.json',
+}
 
 
 class Evaluator:
@@ -9,41 +22,51 @@ class Evaluator:
     def __init__(self, file_format):
 
         # load roberta
-        tokenizer = RobertaTokenizer.from_pretrained('roberta-large-mnli')
-        model = RobertaForSequenceClassification.from_pretrained('roberta-large-mnli')
+        self.tokenizer = RobertaTokenizer.from_pretrained('roberta-large-mnli')
+        self.model = RobertaForSequenceClassification.from_pretrained('roberta-large-mnli')
 
         # load templates
+        with open(TEMPLATE_PATHS[file_format], 'r', encoding='UTF-8') as fh:
+            self.templates = json.load(fh)
         # set parse method
         if file_format == 'webnlg':
-            # XXX
+            self.parse_data = self.parse_webnlg
         elif file_format == 'e2e':
-            # XXX
+            self.parse_data = self.parse_e2e
 
 
-
-
-    def check_inst(instance):
+    def check_inst(self, instance):
         # XXX
-        inputs = tokenizer("Giraffe offers French food. Giraffe is not family-friendly. </s></s> Giraffe serves French food in the riverside and is not family-friendly. ", return_tensors="pt")
-        outputs = model(**inputs, labels=labels)
+
+        inputs = self.tokenizer("Giraffe offers French food. Giraffe is not family-friendly. </s></s> Giraffe serves French food in the riverside and is not family-friendly. ", return_tensors="pt")
+        outputs = self.model(**inputs, labels=labels)
         torch.nn.Softmax(dim=1)(outputs[1])
 
-    def parse_e2e(fname):
-        # XXX
+    def parse_e2e(self, fname):
+        mrs, sents = read_tsv(fname)
+        mrs = [self.da_to_entry(idx, DA.parse_diligent_da(mr)) for idx, mr in enumerate(mrs)]
+        return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
-    def parse_webnlg(fnames):
+    def da_to_entry(self, eid, da):
+        name = [dai for dai in da if dai.slot == 'name'][0].value
+        triples = [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
+        return Entry(eid=eid, size=len(da) - 1, category='E2E', originaltripleset=triples,
+                     modifiedtripleset=triples, entitymap=None, lexEntries=None)
+
+
+    def parse_webnlg(self, fnames):
         # XXX
         # this will be two files -- input & output
         # need to split them
+        pass
 
 
-    def eval_file(fname):
+    def eval_file(self, fname):
         # XXX main method
         data = self.parse_data(fname)
 
-
         for instance in data:
-            result = check_inst(instance)
+            result = self.check_inst(instance)
 
 
 
