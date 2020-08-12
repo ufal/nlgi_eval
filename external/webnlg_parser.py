@@ -16,7 +16,7 @@ import re
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
-from webnlg_entry import *
+from .webnlg_entry import *
 
 def parse(in_file):
     tree = ET.parse(in_file)
@@ -43,13 +43,13 @@ def parse(in_file):
             modifiedtripleset.append(Triple(subject=e1.replace('\'', ''), predicate=pred, object=e2.replace('\'', '')))
 
         entitymap = []
-        mapping= entry.find('entitymap')
+        mapping= entry.find('entitymap') or []
         for entitytag in mapping:
             tag, entity = entitytag.text.split(' | ')
             entitymap.append(TagEntity(tag=tag, entity=entity))
 
         lexList = []
-        lexEntries = entry.findall('lex')
+        lexEntries = entry.findall('lex') or []
         for lex in lexEntries:
             comment = lex.attrib['comment']
             lid = lex.attrib['lid']

@@ -6,9 +6,11 @@ import torch
 from argparse import ArgumentParser
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
 from tgen.data import DA
+from logzero import logger
 
 from external.e2e_metrics_tsv import read_tsv
 from external.webnlg_entry import Entry, Triple
+import external.webnlg_parser as webnlg_parser
 
 
 TEMPLATE_PATHS = {
@@ -34,13 +36,38 @@ class Evaluator:
         elif file_format == 'e2e':
             self.parse_data = self.parse_e2e
 
+    def triples_to_templates(self, tripleset):
+        output = ''
+        for triple in tripleset:
+            template = self.templates[triple.predicate]
+            if isinstance(template, dict):
+                template = template[triple.object]
+            if isinstance(template, list):
+                template = template[0]  # XXX don't take the first, but the best template
+            template = template.replace('<subject>', triple.subject)
+            template = template.replace('<object>', triple.object)
+            template = template.replace('_', ' ')
+            output += (' ' if output else '') + template
+        return output
+
+    def roberta_classify(self, a, b):
+        inputs = self.tokenizer("%s </s></s> %s" % (a, b), return_tensors="pt")
+        labels = torch.tensor([1]).unsqueeze(0)  # batch size = 1
+        outputs = self.model(**inputs, labels=labels)
+        outputs = torch.nn.Softmax(dim=1)(outputs[1]).detach().numpy()[0]
+        return outputs
 
     def check_inst(self, instance):
-        # XXX
+        mr, sent = instance
+        templ = self.triples_to_templates(mr.modifiedtripleset)
 
-        inputs = self.tokenizer("Giraffe offers French food. Giraffe is not family-friendly. </s></s> Giraffe serves French food in the riverside and is not family-friendly. ", return_tensors="pt")
-        outputs = self.model(**inputs, labels=labels)
-        torch.nn.Softmax(dim=1)(outputs[1])
+        logger.debug("%s\nTEMP: %s\nSENT: %s" % (" + ".join([repr(t) for t in mr.modifiedtripleset]), templ, sent))
+        # mr -> sent
+        outputs = self.roberta_classify(templ, sent)
+        logger.debug("--> C: %.4f N: %.4f E: %.4f" % tuple(outputs))
+        # sent -> mr
+        outputs = self.roberta_classify(sent, templ)
+        logger.debug("<-- C: %.4f N: %.4f E: %.4f" % tuple(outputs))
 
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
@@ -48,6 +75,7 @@ class Evaluator:
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
     def da_to_entry(self, eid, da):
+        # convert a TGen DA into WebNLG style triples
         name = [dai for dai in da if dai.slot == 'name'][0].value
         triples = [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
         return Entry(eid=eid, size=len(da) - 1, category='E2E', originaltripleset=triples,
@@ -55,10 +83,14 @@ class Evaluator:
 
 
     def parse_webnlg(self, fnames):
-        # XXX
-        # this will be two files -- input & output
-        # need to split them
-        pass
+        # split input & output filenames
+        input_fname, output_fname = fnames.split(',')
+        # parse input XML triples
+        mrs = list(webnlg_parser.parse(input_fname))
+        # read output sentences
+        with open(output_fname, 'r', encoding='UTF-8') as fh:
+            sents = [line.strip() for line in fh.readlines()]
+        return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
 
     def eval_file(self, fname):
