@@ -2,6 +2,8 @@
 
 import json
 import torch
+import re
+import numpy as np
 
 from argparse import ArgumentParser
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
@@ -9,13 +11,21 @@ from tgen.data import DA
 from logzero import logger
 
 from external.e2e_metrics_tsv import read_tsv
-from external.webnlg_entry import Entry, Triple
+from external.webnlg_entry import Triple
 import external.webnlg_parser as webnlg_parser
 
 
 TEMPLATE_PATHS = {
     'e2e': 'fusenlg/data/e2e/templates_basic.json',
     'webnlg': 'fusenlg/data/webnlg/templates.json',
+}
+
+# the templates are slightly different from what E2E evaluation produced => remap
+TEMPLATE_REMAP = {
+    'eat_type': 'eatType',
+    'rating': 'customer rating',
+    'family_friendly': 'familyFriendly',
+    'price_range': 'priceRange',
 }
 
 
@@ -37,17 +47,27 @@ class Evaluator:
             self.parse_data = self.parse_e2e
 
     def triples_to_templates(self, tripleset):
-        output = ''
+        output = []
         for triple in tripleset:
-            template = self.templates[triple.predicate]
+            if triple.predicate not in self.templates:
+                # if template isn't found, check remapping first
+                if triple.predicate in TEMPLATE_REMAP and TEMPLATE_REMAP[triple.predicate] in self.templates:
+                    template = self.templates[TEMPLATE_REMAP[triple.predicate]]
+                else:  # if remapping doesn't work either, create a backoff template
+                    template = 'The %s of <subject> is <object>.' % triple.predicate
+                    template = re.sub('([a-z])([A-Z])', r"\1 \2", template)  # get rid of camel case
+                    logger.warn('Created backoff template for %s' % (triple.predicate))
+            else:  # take the template
+                template = self.templates[triple.predicate]
             if isinstance(template, dict):
                 template = template[triple.object]
             if isinstance(template, list):
                 template = template[0]  # XXX don't take the first, but the best template
             template = template.replace('<subject>', triple.subject)
-            template = template.replace('<object>', triple.object)
+            obj_str = re.sub('^["\'](.*)["\']$', r'\1', triple.object)  # remove quotes around values
+            template = template.replace('<object>', obj_str)
             template = template.replace('_', ' ')
-            output += (' ' if output else '') + template
+            output.append(template)
         return output
 
     def roberta_classify(self, a, b):
@@ -57,58 +77,85 @@ class Evaluator:
         outputs = torch.nn.Softmax(dim=1)(outputs[1]).detach().numpy()[0]
         return outputs
 
-    def check_inst(self, instance):
-        mr, sent = instance
-        templ = self.triples_to_templates(mr.modifiedtripleset)
+    def check_inst(self, mr, sent):
+        templs = self.triples_to_templates(mr)
 
-        logger.debug("%s\nTEMP: %s\nSENT: %s" % (" + ".join([repr(t) for t in mr.modifiedtripleset]), templ, sent))
+        logger.debug("%s\nTEMP: %s\nSENT: %s" % (" ++ ".join([str(t) for t in mr]), ' '.join(templs), sent))
         # mr -> sent
-        outputs = self.roberta_classify(templ, sent)
-        logger.debug("--> C: %.4f N: %.4f E: %.4f" % tuple(outputs))
+        mr2sent = self.roberta_classify(' '.join(templs), sent)
+        logger.debug("--> C: %.4f N: %.4f E: %.4f" % tuple(mr2sent))
+        mr2sent = ['C', 'N', 'E'][np.argmax(mr2sent)]
         # sent -> mr
-        outputs = self.roberta_classify(sent, templ)
-        logger.debug("<-- C: %.4f N: %.4f E: %.4f" % tuple(outputs))
+        sent2mr = self.roberta_classify(sent, ' '.join(templs))
+        logger.debug("<-- C: %.4f N: %.4f E: %.4f" % tuple(sent2mr))
+        sent2mr = ['C', 'N', 'E'][np.argmax(sent2mr)]
+
+        if sent2mr == 'E' and mr2sent == 'E':
+            output = 'OK'
+        elif sent2mr == 'E':
+            output = 'hallucination'
+        elif mr2sent == 'E':
+            output = 'omission'
+        else:
+            output = 'hallucination+omission'
+        logger.debug(output)
+
+        # sent -> mr for individual slots
+        omitted = []
+        if 'omission' in output:
+            for triple, templ in zip(mr, templs):
+                sent2triple = self.roberta_classify(sent, templ)
+                sent2triple = ['C', 'N', 'E'][np.argmax(sent2mr)]
+                if sent2triple != 'E':
+                    omitted.append(triple)
+
+        logger.debug('Ommitted: %s' % ' ++ '.join([str(t) for t in omitted]))
+        return output, omitted
 
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
-        mrs = [self.da_to_entry(idx, DA.parse_diligent_da(mr)) for idx, mr in enumerate(mrs)]
+        mrs = [self.da_to_triples(idx, DA.parse_diligent_da(mr)) for idx, mr in enumerate(mrs)]
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
-    def da_to_entry(self, eid, da):
+    def da_to_triples(self, eid, da):
         # convert a TGen DA into WebNLG style triples
         name = [dai for dai in da if dai.slot == 'name'][0].value
-        triples = [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
-        return Entry(eid=eid, size=len(da) - 1, category='E2E', originaltripleset=triples,
-                     modifiedtripleset=triples, entitymap=None, lexEntries=None)
-
+        return [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
 
     def parse_webnlg(self, fnames):
         # split input & output filenames
         input_fname, output_fname = fnames.split(',')
         # parse input XML triples
         mrs = list(webnlg_parser.parse(input_fname))
+        mrs = [mr.modifiedtripleset for mr in mrs]
         # read output sentences
         with open(output_fname, 'r', encoding='UTF-8') as fh:
             sents = [line.strip() for line in fh.readlines()]
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
+    def eval_file(self, in_fname, out_fname):
+        """Main method. Evaluate a given file."""
+        data = self.parse_data(in_fname)
+        outputs = []
+        for mr, sent in data:
+            result, omitted = self.check_inst(mr, sent)
+            outputs.append({'mr': '++'.join([str(t) for t in mr]),
+                            'sent': sent,
+                            'result': result,
+                            'omitted': '++'.join([str(t) for t in omitted])})
 
-    def eval_file(self, fname):
-        # XXX main method
-        data = self.parse_data(fname)
-
-        for instance in data:
-            result = self.check_inst(instance)
-
+        with open(out_fname, 'w', encoding='UTF-8') as fh:
+            json.dump(fh, outputs, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
-    ap.add_argument('input_file', type=str, help='Input file to check')
+    ap.add_argument('input_file', type=str, help='Input file(s) to check')
+    ap.add_argument('output_file', type=str, help='Output file')
 
     args = ap.parse_args()
     evaluator = Evaluator(args.type)
-    evaluator.eval_file(args.input_file)
+    evaluator.eval_file(args.input_file, args.output_file)
 
     # XXX some way of checking the correlations
