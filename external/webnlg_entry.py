@@ -24,7 +24,7 @@ class Triple():
         return '<Triple: %s | %s | %s>' % (self.subject, self.predicate, self.object)
 
     def __str__(self):
-        return ' | '.join((self.subject, self.predicate, self.object))
+        return '|'.join((self.subject, self.predicate, self.object))
 
 class Lex():
     def __init__(self, comment, lid, text, template, orderedtripleset=[], references=[]):

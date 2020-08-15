@@ -80,7 +80,7 @@ class Evaluator:
     def check_inst(self, mr, sent):
         templs = self.triples_to_templates(mr)
 
-        logger.debug("%s\nTEMP: %s\nSENT: %s" % (" ++ ".join([str(t) for t in mr]), ' '.join(templs), sent))
+        logger.debug("%s\nTEMP: %s\nSENT: %s" % ("  ++  ".join([str(t) for t in mr]), ' '.join(templs), sent))
         # mr -> sent
         mr2sent = self.roberta_classify(' '.join(templs), sent)
         logger.debug("--> C: %.4f N: %.4f E: %.4f" % tuple(mr2sent))
@@ -105,11 +105,11 @@ class Evaluator:
         if 'omission' in output:
             for triple, templ in zip(mr, templs):
                 sent2triple = self.roberta_classify(sent, templ)
-                sent2triple = ['C', 'N', 'E'][np.argmax(sent2mr)]
+                sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
                 if sent2triple != 'E':
                     omitted.append(triple)
+            logger.debug('Ommitted: %s' % '  ++  '.join([str(t) for t in omitted]))
 
-        logger.debug('Ommitted: %s' % ' ++ '.join([str(t) for t in omitted]))
         return output, omitted
 
     def parse_e2e(self, fname):
@@ -139,13 +139,13 @@ class Evaluator:
         outputs = []
         for mr, sent in data:
             result, omitted = self.check_inst(mr, sent)
-            outputs.append({'mr': '++'.join([str(t) for t in mr]),
+            outputs.append({'mr': '  ++  '.join([str(t) for t in mr]),
                             'sent': sent,
                             'result': result,
-                            'omitted': '++'.join([str(t) for t in omitted])})
+                            'omitted': '  ++  '.join([str(t) for t in omitted])})
 
         with open(out_fname, 'w', encoding='UTF-8') as fh:
-            json.dump(fh, outputs, ensure_ascii=False, indent=4)
+            json.dump(outputs, fh, ensure_ascii=False, indent=4)
 
 
 if __name__ == '__main__':
