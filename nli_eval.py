@@ -143,7 +143,7 @@ class Evaluator:
             sents = [line.strip() for line in fh.readlines()]
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
-    def eval_file(self, in_fname, out_fname):
+    def eval_file(self, in_fname):
         """Main method. Evaluate a given file."""
         data = self.parse_data(in_fname)
         outputs = []
@@ -154,8 +154,6 @@ class Evaluator:
                             'result': result,
                             'omitted': omitted})
 
-        with open(out_fname, 'w', encoding='UTF-8') as fh:
-            json.dump(outputs, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
         return outputs
 
     def check_with_e2e_results(self, preds, gold_fname):
@@ -177,12 +175,16 @@ class Evaluator:
                 logger.error('MRs not equal at %d: %s != %s' % (idx, str(gold['mr']), str(pred['mr'])))
             if pred['sent'] != gold['sent']:
                 logger.error('Sentences not equal at %d: %s != %s' % (idx, str(gold['sent']), str(pred['sent'])))
+            pred['gold_result'] = gold['result']
+            if pred['result'] != gold['result']:
+                pred['error'] = True
 
         # metrics
         y_pred = [inst['result'] for inst in preds]
         y_gold = [inst['result'] for inst in golds]
         acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
-        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred)
+        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=['OK', 'hallucination', 'omission', 'hallucination+omission'])
+        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_hal', 'g_om', 'g_h+o'], columns=['p_OK', 'p_hal', 'p_om' , 'p_h+o'])
 
         logger.info('Accuracy: %.4f' % acc)
         logger.info('Confusion matrix:\n%s' % str(conf_matrix))
@@ -197,7 +199,10 @@ if __name__ == '__main__':
 
     args = ap.parse_args()
     evaluator = Evaluator(args.type)
-    predictions = evaluator.eval_file(args.input_file, args.output_file)
+    predictions = evaluator.eval_file(args.input_file)
 
     if args.eval_file and args.type == 'e2e':
         evaluator.check_with_e2e_results(predictions, args.eval_file)
+
+    with open(args.output_file, 'w', encoding='UTF-8') as fh:
+            json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
