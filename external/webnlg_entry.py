@@ -26,6 +26,10 @@ class Triple():
     def __str__(self):
         return '|'.join((self.subject, self.predicate, self.object))
 
+    def __eq__(self, other):
+        return self.subject == other.subject and self.predicate == other.predicate and self.object == other.object
+
+
 class Lex():
     def __init__(self, comment, lid, text, template, orderedtripleset=[], references=[]):
         self.comment = comment

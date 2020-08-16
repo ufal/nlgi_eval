@@ -4,6 +4,8 @@ import json
 import torch
 import re
 import numpy as np
+import pandas as pd
+import sklearn
 
 from argparse import ArgumentParser
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
@@ -27,6 +29,14 @@ TEMPLATE_REMAP = {
     'family_friendly': 'familyFriendly',
     'price_range': 'priceRange',
 }
+
+
+class TripleJSONEnc(json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, Triple):
+            return str(obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 class Evaluator:
@@ -108,16 +118,16 @@ class Evaluator:
                 sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
                 if sent2triple != 'E':
                     omitted.append(triple)
-            logger.debug('Ommitted: %s' % '  ++  '.join([str(t) for t in omitted]))
+            logger.debug('Omitted: %s' % '  ++  '.join([str(t) for t in omitted]))
 
         return output, omitted
 
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
-        mrs = [self.da_to_triples(idx, DA.parse_diligent_da(mr)) for idx, mr in enumerate(mrs)]
+        mrs = [self.da_to_triples(DA.parse_diligent_da(mr)) for mr in mrs]
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
-    def da_to_triples(self, eid, da):
+    def da_to_triples(self, da):
         # convert a TGen DA into WebNLG style triples
         name = [dai for dai in da if dai.slot == 'name'][0].value
         return [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
@@ -139,23 +149,55 @@ class Evaluator:
         outputs = []
         for mr, sent in data:
             result, omitted = self.check_inst(mr, sent)
-            outputs.append({'mr': '  ++  '.join([str(t) for t in mr]),
+            outputs.append({'mr': mr,
                             'sent': sent,
                             'result': result,
-                            'omitted': '  ++  '.join([str(t) for t in omitted])})
+                            'omitted': omitted})
 
         with open(out_fname, 'w', encoding='UTF-8') as fh:
-            json.dump(outputs, fh, ensure_ascii=False, indent=4)
+            json.dump(outputs, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
+        return outputs
+
+    def check_with_e2e_results(self, preds, gold_fname):
+        golds = pd.read_csv(gold_fname, sep='\t', encoding='UTF-8').to_dict('records')
+        # adapt format to our output
+        for gold in golds:
+            gold['mr'] = self.da_to_triples(DA.parse_diligent_da(gold['MR']))
+            gold['sent'] = gold['output']
+            result = 'OK'
+            if gold['added']:
+                result = 'hallucination'
+            if gold['missing']:
+                result = 'hallucination+omission' if gold['added'] else 'omission'
+            gold['result'] = result
+
+        # sanity check
+        for idx, (pred, gold) in enumerate(zip(preds, golds)):
+            if pred['mr'] != gold['mr']:
+                logger.error('MRs not equal at %d: %s != %s' % (idx, str(gold['mr']), str(pred['mr'])))
+            if pred['sent'] != gold['sent']:
+                logger.error('Sentences not equal at %d: %s != %s' % (idx, str(gold['sent']), str(pred['sent'])))
+
+        # metrics
+        y_pred = [inst['result'] for inst in preds]
+        y_gold = [inst['result'] for inst in golds]
+        acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
+        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred)
+
+        logger.info('Accuracy: %.4f' % acc)
+        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
 
 
 if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
+    ap.add_argument('--eval-file', '-e', type=str, help='Path to file to evaluate the predictions against')
     ap.add_argument('input_file', type=str, help='Input file(s) to check')
     ap.add_argument('output_file', type=str, help='Output file')
 
     args = ap.parse_args()
     evaluator = Evaluator(args.type)
-    evaluator.eval_file(args.input_file, args.output_file)
+    predictions = evaluator.eval_file(args.input_file, args.output_file)
 
-    # XXX some way of checking the correlations
+    if args.eval_file and args.type == 'e2e':
+        evaluator.check_with_e2e_results(predictions, args.eval_file)
