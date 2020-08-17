@@ -53,8 +53,10 @@ class Evaluator:
         # set parse method
         if file_format == 'webnlg':
             self.parse_data = self.parse_webnlg
+            self.check_with_gold = self.check_with_gold_webnlg
         elif file_format == 'e2e':
             self.parse_data = self.parse_e2e
+            self.check_with_gold = self.check_with_gold_e2e
 
     def triples_to_templates(self, tripleset):
         output = []
@@ -93,11 +95,13 @@ class Evaluator:
         logger.debug("%s\nTEMP: %s\nSENT: %s" % ("  ++  ".join([str(t) for t in mr]), ' '.join(templs), sent))
         # mr -> sent
         mr2sent = self.roberta_classify(' '.join(templs), sent)
-        logger.debug("--> C: %.4f N: %.4f E: %.4f" % tuple(mr2sent))
+        raw_results = {'mr2sent': "C: %.4f N: %.4f E: %.4f" % tuple(mr2sent)}
+        logger.debug("--> " + raw_results['mr2sent'])
         mr2sent = ['C', 'N', 'E'][np.argmax(mr2sent)]
         # sent -> mr
         sent2mr = self.roberta_classify(sent, ' '.join(templs))
-        logger.debug("<-- C: %.4f N: %.4f E: %.4f" % tuple(sent2mr))
+        raw_results['sent2mr'] = "C: %.4f N: %.4f E: %.4f" % tuple(sent2mr)
+        logger.debug("<-- " + raw_results['sent2mr'])
         sent2mr = ['C', 'N', 'E'][np.argmax(sent2mr)]
 
         if sent2mr == 'E' and mr2sent == 'E':
@@ -112,15 +116,17 @@ class Evaluator:
 
         # sent -> mr for individual slots
         omitted = []
-        if 'omission' in output:
-            for triple, templ in zip(mr, templs):
-                sent2triple = self.roberta_classify(sent, templ)
-                sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
-                if sent2triple != 'E':
-                    omitted.append(triple)
+        for triple, templ in zip(mr, templs):
+            sent2triple = self.roberta_classify(sent, templ)
+            sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
+            if sent2triple != 'E':
+                omitted.append(triple)
+        if omitted:
             logger.debug('Omitted: %s' % '  ++  '.join([str(t) for t in omitted]))
+            # override the global decision -- this is more fine-grained
+            output = 'hallucination+omission' if 'hallucination' in output else 'omission'
 
-        return output, omitted
+        return output, omitted, raw_results
 
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
@@ -133,14 +139,19 @@ class Evaluator:
         return [Triple(name, dai.slot, dai.value) for dai in da if dai.slot != 'name']
 
     def parse_webnlg(self, fnames):
-        # split input & output filenames
-        input_fname, output_fname = fnames.split(',')
-        # parse input XML triples
-        mrs = list(webnlg_parser.parse(input_fname))
-        mrs = [mr.modifiedtripleset for mr in mrs]
-        # read output sentences
-        with open(output_fname, 'r', encoding='UTF-8') as fh:
-            sents = [line.strip() for line in fh.readlines()]
+        if ',' in fnames:
+            # split input & output filenames
+            input_fname, output_fname = fnames.split(',')
+            # parse input XML triples
+            mrs = list(webnlg_parser.parse(input_fname))
+            mrs = [mr.modifiedtripleset for mr in mrs]
+            # read output sentences
+            with open(output_fname, 'r', encoding='UTF-8') as fh:
+                sents = [line.strip() for line in fh.readlines()]
+        else:
+            data = pd.read_csv(fnames, sep=',', encoding='UTF-8').to_dict('records')
+            mrs = [[Triple.parse(t) for t in inst['mr'].split('<br>')] for inst in data]
+            sents = [inst['text'] for inst in data]
         return [(mr, sent) for mr, sent in zip(mrs, sents)]
 
     def eval_file(self, in_fname):
@@ -148,15 +159,44 @@ class Evaluator:
         data = self.parse_data(in_fname)
         outputs = []
         for mr, sent in data:
-            result, omitted = self.check_inst(mr, sent)
+            result, omitted, raw_results = self.check_inst(mr, sent)
             outputs.append({'mr': mr,
                             'sent': sent,
                             'result': result,
-                            'omitted': omitted})
+                            'omitted': omitted,
+                            'raw_results': raw_results})
 
         return outputs
 
-    def check_with_e2e_results(self, preds, gold_fname):
+    def check_with_gold_webnlg(self, preds, gold_fname):
+        """Evaluation for WebNLG (against the "semantics" column in human eval)."""
+        golds = pd.read_csv(gold_fname, sep=',', encoding='UTF-8').to_dict('records')
+        for gold in golds:
+            gold['mr'] = [Triple.parse(t) for t in gold['mr'].split('<br>')]
+            gold['sent'] = gold['text']
+            gold['result'] = 'OK' if gold['semantics'] >= 2.5 else 'not OK'
+
+        for idx, (pred, gold) in enumerate(zip(preds, golds)):
+            # adding debug info
+            pred['gold_result'] = gold['result']
+            if pred['result'] != gold['result']:
+                pred['error'] = True
+            pred['gold_human_rating'] = gold['semantics']
+            pred['detailed_result'] = pred['result']
+            pred['result'] = 'OK' if pred['result'] == 'OK' else 'not OK'
+
+        # metrics
+        y_pred = [inst['result'] for inst in preds]
+        y_gold = [inst['result'] for inst in golds]
+        acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
+        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=['OK', 'not OK'])
+        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_not'], columns=['p_OK', 'p_not'])
+
+        logger.info('Accuracy: %.4f' % acc)
+        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+
+    def check_with_gold_e2e(self, preds, gold_fname):
+        """Evaluation for E2E (against the slot error automatic script predictions)."""
         golds = pd.read_csv(gold_fname, sep='\t', encoding='UTF-8').to_dict('records')
         # adapt format to our output
         for gold in golds:
@@ -169,22 +209,19 @@ class Evaluator:
                 result = 'hallucination+omission' if gold['added'] else 'omission'
             gold['result'] = result
 
-        # sanity check
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
-            if pred['mr'] != gold['mr']:
-                logger.error('MRs not equal at %d: %s != %s' % (idx, str(gold['mr']), str(pred['mr'])))
-            if pred['sent'] != gold['sent']:
-                logger.error('Sentences not equal at %d: %s != %s' % (idx, str(gold['sent']), str(pred['sent'])))
+            # adding debug info
             pred['gold_result'] = gold['result']
             if pred['result'] != gold['result']:
                 pred['error'] = True
+            pred['gold_diff'] = json.loads(gold['diff'])
 
         # metrics
         y_pred = [inst['result'] for inst in preds]
         y_gold = [inst['result'] for inst in golds]
         acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
         conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=['OK', 'hallucination', 'omission', 'hallucination+omission'])
-        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_hal', 'g_om', 'g_h+o'], columns=['p_OK', 'p_hal', 'p_om' , 'p_h+o'])
+        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_hal', 'g_om', 'g_h+o'], columns=['p_OK', 'p_hal', 'p_om', 'p_h+o'])
 
         logger.info('Accuracy: %.4f' % acc)
         logger.info('Confusion matrix:\n%s' % str(conf_matrix))
@@ -193,7 +230,7 @@ class Evaluator:
 if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
-    ap.add_argument('--eval-file', '-e', type=str, help='Path to file to evaluate the predictions against')
+    ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
     ap.add_argument('input_file', type=str, help='Input file(s) to check')
     ap.add_argument('output_file', type=str, help='Output file')
 
@@ -201,8 +238,8 @@ if __name__ == '__main__':
     evaluator = Evaluator(args.type)
     predictions = evaluator.eval_file(args.input_file)
 
-    if args.eval_file and args.type == 'e2e':
-        evaluator.check_with_e2e_results(predictions, args.eval_file)
+    if args.eval:
+        evaluator.check_with_gold(predictions, args.input_file)
 
     with open(args.output_file, 'w', encoding='UTF-8') as fh:
-            json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
+        json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)

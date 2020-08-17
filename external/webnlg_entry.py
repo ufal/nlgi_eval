@@ -21,13 +21,22 @@ class Triple():
         self.object = object
 
     def __repr__(self):
-        return '<Triple: %s | %s | %s>' % (self.subject, self.predicate, self.object)
+        subj = self.subject.replace('"', r'\"')
+        pred = self.predicate.replace('"', r'\"')
+        obj = self.object.replace('"', r'\"')
+        return 'Triple.parse("%s | %s | %s")' % (subj, pred, obj)
 
     def __str__(self):
         return '|'.join((self.subject, self.predicate, self.object))
 
     def __eq__(self, other):
         return self.subject == other.subject and self.predicate == other.predicate and self.object == other.object
+
+
+    @staticmethod
+    def parse(text):
+        subj, pred, obj = text.split('|')
+        return Triple(subj.strip(), pred.strip(), obj.strip())
 
 
 class Lex():
