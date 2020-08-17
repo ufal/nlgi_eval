@@ -179,11 +179,11 @@ class Evaluator:
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
             # adding debug info
             pred['gold_result'] = gold['result']
-            if pred['result'] != gold['result']:
-                pred['error'] = True
             pred['gold_human_rating'] = gold['semantics']
             pred['detailed_result'] = pred['result']
             pred['result'] = 'OK' if pred['result'] == 'OK' else 'not OK'
+            if pred['result'] != gold['result']:
+                pred['error'] = True
 
         # metrics
         y_pred = [inst['result'] for inst in preds]
