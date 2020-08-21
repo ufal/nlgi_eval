@@ -6,6 +6,7 @@ import re
 import numpy as np
 import pandas as pd
 import sklearn
+import scipy
 
 from argparse import ArgumentParser
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
@@ -41,15 +42,25 @@ class TripleJSONEnc(json.JSONEncoder):
 
 class Evaluator:
 
-    def __init__(self, file_format):
+    def __init__(self, file_format, use_templates=True):
+
+        self.use_gpu = torch.cuda.is_available()
+        logger.debug('Use GPU: %r' % self.use_gpu)
 
         # load roberta
+        logger.debug('Loading models...')
         self.tokenizer = RobertaTokenizer.from_pretrained('roberta-large-mnli')
         self.model = RobertaForSequenceClassification.from_pretrained('roberta-large-mnli')
+        if self.use_gpu:
+            self.model.to('cuda')
 
         # load templates
-        with open(TEMPLATE_PATHS[file_format], 'r', encoding='UTF-8') as fh:
-            self.templates = json.load(fh)
+        if use_templates:
+            logger.debug('Loading templates...')
+            with open(TEMPLATE_PATHS[file_format], 'r', encoding='UTF-8') as fh:
+                self.templates = json.load(fh)
+        else:
+            self.templates = {}
         # set parse method
         if file_format == 'webnlg':
             self.parse_data = self.parse_webnlg
@@ -57,6 +68,7 @@ class Evaluator:
         elif file_format == 'e2e':
             self.parse_data = self.parse_e2e
             self.check_with_gold = self.check_with_gold_e2e
+        logger.debug('Ready.')
 
     def triples_to_templates(self, tripleset):
         output = []
@@ -69,6 +81,7 @@ class Evaluator:
                     template = 'The %s of <subject> is <object>.' % triple.predicate
                     template = re.sub('([a-z])([A-Z])', r"\1 \2", template)  # get rid of camel case
                     logger.warn('Created backoff template for %s' % (triple.predicate))
+                    self.templates[triple.predicate] = template
             else:  # take the template
                 template = self.templates[triple.predicate]
             if isinstance(template, dict):
@@ -85,23 +98,31 @@ class Evaluator:
     def roberta_classify(self, a, b):
         inputs = self.tokenizer("%s </s></s> %s" % (a, b), return_tensors="pt")
         labels = torch.tensor([1]).unsqueeze(0)  # batch size = 1
-        outputs = self.model(**inputs, labels=labels)
-        outputs = torch.nn.Softmax(dim=1)(outputs[1]).detach().numpy()[0]
-        return outputs
+        if self.use_gpu:
+            inputs = inputs.to('cuda')
+            labels = labels.to('cuda')
+        _, output = self.model(**inputs, labels=labels)  # ignoring loss
+        if self.use_gpu:
+            output = output.cpu()
+        output = torch.nn.Softmax(dim=1)(output).detach().numpy()[0]
+        return output
 
     def check_inst(self, mr, sent):
         templs = self.triples_to_templates(mr)
 
         logger.debug("%s\nTEMP: %s\nSENT: %s" % ("  ++  ".join([str(t) for t in mr]), ' '.join(templs), sent))
+        ent_confs = []
         # mr -> sent
         mr2sent = self.roberta_classify(' '.join(templs), sent)
         raw_results = {'mr2sent': "C: %.4f N: %.4f E: %.4f" % tuple(mr2sent)}
         logger.debug("--> " + raw_results['mr2sent'])
+        ent_confs.append(float(mr2sent[2]))
         mr2sent = ['C', 'N', 'E'][np.argmax(mr2sent)]
         # sent -> mr
         sent2mr = self.roberta_classify(sent, ' '.join(templs))
         raw_results['sent2mr'] = "C: %.4f N: %.4f E: %.4f" % tuple(sent2mr)
         logger.debug("<-- " + raw_results['sent2mr'])
+        ent_confs.append(float(sent2mr[2]))
         sent2mr = ['C', 'N', 'E'][np.argmax(sent2mr)]
 
         if sent2mr == 'E' and mr2sent == 'E':
@@ -118,15 +139,17 @@ class Evaluator:
         omitted = []
         for triple, templ in zip(mr, templs):
             sent2triple = self.roberta_classify(sent, templ)
+            ent_confs.append(float(sent2triple[2]))
             sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
             if sent2triple != 'E':
                 omitted.append(triple)
+
         if omitted:
             logger.debug('Omitted: %s' % '  ++  '.join([str(t) for t in omitted]))
             # override the global decision -- this is more fine-grained
             output = 'hallucination+omission' if 'hallucination' in output else 'omission'
 
-        return output, omitted, raw_results
+        return output, min(ent_confs), omitted, raw_results
 
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
@@ -159,14 +182,31 @@ class Evaluator:
         data = self.parse_data(in_fname)
         outputs = []
         for mr, sent in data:
-            result, omitted, raw_results = self.check_inst(mr, sent)
+            result, OK_conf, omitted, raw_results = self.check_inst(mr, sent)
             outputs.append({'mr': mr,
                             'sent': sent,
                             'result': result,
+                            'OK_confidence': OK_conf,
                             'omitted': omitted,
                             'raw_results': raw_results})
 
         return outputs
+
+    def compute_metrics(self, y_pred, y_gold, fine=False):
+        """Compute accuracy and confusion matrix."""
+        labels_order = ['OK', 'not OK']
+        row_labels=['g_OK', 'g_not']
+        col_labels=['p_OK', 'p_not']
+        if fine:
+            labels_order = ['OK', 'hallucination', 'omission', 'hallucination+omission']
+            row_labels = ['g_OK', 'g_hal', 'g_om', 'g_h+o']
+            col_labels = ['p_OK', 'p_hal', 'p_om', 'p_h+o']
+
+        acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
+        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=labels_order)
+        conf_matrix = pd.DataFrame(conf_matrix, index=row_labels, columns=col_labels)
+
+        return acc, conf_matrix
 
     def check_with_gold_webnlg(self, preds, gold_fname):
         """Evaluation for WebNLG (against the "semantics" column in human eval)."""
@@ -174,26 +214,30 @@ class Evaluator:
         for gold in golds:
             gold['mr'] = [Triple.parse(t) for t in gold['mr'].split('<br>')]
             gold['sent'] = gold['text']
-            gold['result'] = 'OK' if gold['semantics'] >= 2.5 else 'not OK'
 
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
             # adding debug info
-            pred['gold_result'] = gold['result']
             pred['gold_human_rating'] = gold['semantics']
-            pred['detailed_result'] = pred['result']
-            pred['result'] = 'OK' if pred['result'] == 'OK' else 'not OK'
-            if pred['result'] != gold['result']:
+            if (pred['result'] == 'OK') != (gold['semantics'] >= 2.5):
                 pred['error'] = True
 
+        results = {'predictions': preds}
         # metrics
-        y_pred = [inst['result'] for inst in preds]
-        y_gold = [inst['result'] for inst in golds]
-        acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
-        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=['OK', 'not OK'])
-        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_not'], columns=['p_OK', 'p_not'])
+        for threshold in [2.5, 2.0]:
+            y_pred = ['OK' if inst['result'] == 'OK' else 'not OK' for inst in preds]
+            y_gold = ['OK' if inst['semantics'] >= 2.5 else 'not OK' for inst in golds]
+            acc, conf_matrix = self.compute_metrics(y_pred, y_gold)
+            logger.info('Threshold %.1f -- Accuracy: %.4f' % (threshold, acc))
+            logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+            results['metrics @ %.1f' % threshold] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
 
-        logger.info('Accuracy: %.4f' % acc)
-        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+        # correlation with humans
+        conf_rho, conf_rho_p = scipy.stats.spearmanr([inst['OK_confidence'] for inst in preds],
+                                                     [inst['semantics'] for inst in golds])
+        logger.info('Spearman correlation of OK_confidence with human ratings: %.4f (p=%.4f)'
+                    % (conf_rho, conf_rho_p))
+        results['OK_correlation'] = {'rho': conf_rho, 'p_value': conf_rho_p}
+        return results
 
     def check_with_gold_e2e(self, preds, gold_fname):
         """Evaluation for E2E (against the slot error automatic script predictions)."""
@@ -216,30 +260,43 @@ class Evaluator:
                 pred['error'] = True
             pred['gold_diff'] = json.loads(gold['diff'])
 
-        # metrics
+        results = {'predictions': preds}
+        # metrics + rough metrics
         y_pred = [inst['result'] for inst in preds]
         y_gold = [inst['result'] for inst in golds]
-        acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
-        conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=['OK', 'hallucination', 'omission', 'hallucination+omission'])
-        conf_matrix = pd.DataFrame(conf_matrix, index=['g_OK', 'g_hal', 'g_om', 'g_h+o'], columns=['p_OK', 'p_hal', 'p_om', 'p_h+o'])
-
+        acc, conf_matrix = self.compute_metrics(y_pred, y_gold, fine=True)
         logger.info('Accuracy: %.4f' % acc)
         logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+        results['metrics_fine'] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
+
+        y_pred = ['OK' if inst == 'OK' else 'not OK' for inst in y_pred]
+        y_gold = ['OK' if inst == 'OK' else 'not OK' for inst in y_gold]
+        acc, conf_matrix = self.compute_metrics(y_pred, y_gold, fine=False)
+        logger.info('Accuracy: %.4f' % acc)
+        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+        results['metrics_rough'] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
+        return results
 
 
 if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
     ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
+    ap.add_argument('--no-templates', dest='templates', action='store_false', help='Do not use any preloaded templates, use backoff only')
     ap.add_argument('input_file', type=str, help='Input file(s) to check')
     ap.add_argument('output_file', type=str, help='Output file')
 
     args = ap.parse_args()
-    evaluator = Evaluator(args.type)
+
+    logger.debug('Starting...')
+    evaluator = Evaluator(args.type, args.templates)
     predictions = evaluator.eval_file(args.input_file)
 
+    logger.debug('Evaluation...')
     if args.eval:
-        evaluator.check_with_gold(predictions, args.input_file)
+        predictions = evaluator.check_with_gold(predictions, args.input_file)
 
+    logger.debug('Writing output...')
     with open(args.output_file, 'w', encoding='UTF-8') as fh:
         json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
+    logger.debug('Done.')
