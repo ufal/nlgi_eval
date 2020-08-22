@@ -16,6 +16,9 @@ QSUBMIT = qsubmit --logdir '$(TRY_DIR)' --mem $(MEM) --cores $(CPUS) --gpus $(GP
 ACTIVATE = export PYTHONPATH=""; source ./nli_venv/bin/activate  # XXX source your activate script instead
 
 NLI_EVAL = ./nli_eval.py
+GREP_SCORES = ./util/grep_scores.py $$file/{all.tsv.json,webnlg_averaged.csv.json}
+NOWRAP = ./util/nowrap.pl
+SCOREFILE = SCORE
 
 # Runs directories
 RUNS_DIR  := runs# main directory for experiment outputs
@@ -28,6 +31,7 @@ TRY_DIR    = $(RUNS_DIR)/$(TRY_NUM)_$(DATE)_$(RUN_NAME)# experiment main output 
 ifdef D # Shortcut D -> DESC
   DESC := $(D)
 endif
+NUM_EXP = 20  # number of experiments to list in `make desc'
 ifdef N # Shortcut N -> NUM_EXP
   NUM_EXP := $(N)
 endif
@@ -39,6 +43,26 @@ endif
 help:
 	@echo 'XXX TODO Read the makefile first.'
 
+
+# List all experiments, find scores in logs (of various versions)
+desc:
+	@COLS=`tput cols`; \
+	ls -d $(RUNS_DIR)/* | sort | tail -n $(NUM_EXP) | while read file; do \
+		if [[ -f $$file/$(SCOREFILE) && -z "$(REFRESH)" ]]; then \
+			cat $$file/$(SCOREFILE) | $(NOWRAP) $$COLS; \
+			continue ; \
+		fi ; \
+		echo -ne $$file | sed 's/runs\///;s/_/  /;s/_/ /;s/_.*/: /;s/  20/  /;s/-[0-9][0-9]  /  /;' > $$file/$(SCOREFILE);  \
+		$(GREP_SCORES) >> $$file/$(SCOREFILE) ; \
+		cat $$file/ABOUT | tr  '\n' ' ' >> $$file/$(SCOREFILE); \
+		echo >> $$file/$(SCOREFILE); \
+		cat $$file/$(SCOREFILE) | $(NOWRAP) $$COLS; \
+	done
+
+desc_wrap:
+	@ls -d $(RUNS_DIR)/* | sort | tail -n $(NUM_EXP) | while read file; do \
+		cat $$file/$(SCOREFILE) ; \
+	done
 
 printgit:
 	@git status
@@ -63,9 +87,11 @@ run: prepare_dir
 run:
 	$(QSUBMIT) '$(ACTIVATE); \
 	for file in data-e2e/*; do \
+	    echo ">>>>" $$file "<<<<"; \
 	    base=`basename $$file`; \
-	    $(NLI_EVAL) -t e2e $(PARAM) $$file $(TRY_DIR)/$$base; \
+	    $(NLI_EVAL) -e -t e2e $(PARAM) $$file $(TRY_DIR)/$$base.json; \
 	done; \
 	for file in data-webnlg/*; do \
-	    $(NLI_EVAL) -t webnlg $(PARAM) $$file $(TRY_DIR)/$$base; \
+	    echo ">>>>" $$file "<<<<"; \
+	    $(NLI_EVAL) -e -t webnlg $(PARAM) $$file $(TRY_DIR)/$$base.json; \
 	done' 2>&1 | tee $(TRY_DIR)/$(RUN_NAME).log
