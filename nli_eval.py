@@ -149,7 +149,7 @@ class Evaluator:
             # override the global decision -- this is more fine-grained
             output = 'hallucination+omission' if 'hallucination' in output else 'omission'
 
-        return output, min(ent_confs), omitted, raw_results
+        return output, min(ent_confs), omitted, raw_results, templs
 
     def console(self):
         mr_text = input('Input MR (triples divided by |, separated by ++):\n  > ')
@@ -193,8 +193,9 @@ class Evaluator:
         data = self.parse_data(in_fname)
         outputs = []
         for mr, sent in data:
-            result, OK_conf, omitted, raw_results = self.check_inst(mr, sent)
+            result, OK_conf, omitted, raw_results, templs = self.check_inst(mr, sent)
             outputs.append({'mr': mr,
+                            'templates': ' '.join(templs),
                             'sent': sent,
                             'result': result,
                             'OK_confidence': OK_conf,
@@ -232,7 +233,7 @@ class Evaluator:
             f1 = sklearn.metrics.f1_score(y_gold, y_pred, pos_label='not OK')
             logger.info('Recall: %.4f' % rec)
             logger.info('Precision: %.4f' % pre)
-            loggel.info('F1: %.4f' % f1)
+            logger.info('F1: %.4f' % f1)
             results['recall'] = rec
             results['precision'] = pre
             results['f1'] = f1
@@ -247,6 +248,8 @@ class Evaluator:
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
             max_len = max(max_len, len(pred['mr']))
             # adding debug info
+            if 'team' in gold:
+                pred['sys_id'] = gold['team']
             pred['gold_human_rating'] = gold['semantics']
             if (pred['result'] == 'OK') != (gold['semantics'] >= 2.5):
                 pred['error'] = True
@@ -289,6 +292,8 @@ class Evaluator:
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
             max_len = max(max_len, len(pred['mr']))
             # adding debug info
+            if 'sys_id' in gold:
+                pred['sys_id'] = gold['sys_id']
             pred['gold_result'] = gold['result']
             if pred['result'] != gold['result']:
                 pred['error'] = True
@@ -325,7 +330,7 @@ if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
     ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
-    ap.add_argument('--console', '-c', action='store_true', help='Enter console mode')
+    ap.add_argument('--console', '-c', action='store_true', help='Enter console mode (input & output files not required/ignored)')
     ap.add_argument('--no-templates', dest='templates', action='store_false', help='Do not use any preloaded templates, use backoff only')
 
     args, _ = ap.parse_known_args()
