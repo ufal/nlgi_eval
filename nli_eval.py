@@ -151,6 +151,17 @@ class Evaluator:
 
         return output, min(ent_confs), omitted, raw_results
 
+    def console(self):
+        mr_text = input('Input MR (triples divided by |, separated by ++):\n  > ')
+        if not mr_text:
+            return False
+        mr = [Triple.parse(s.strip()) for s in mr_text.split('++')]
+        sent = input('Input text:\n  > ')
+        if not sent:
+            return False
+        self.check_inst(mr, sent)
+        return True
+
     def parse_e2e(self, fname):
         mrs, sents = read_tsv(fname)
         mrs = [self.da_to_triples(DA.parse_diligent_da(mr)) for mr in mrs]
@@ -314,21 +325,30 @@ if __name__ == '__main__':
     ap = ArgumentParser()
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
     ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
+    ap.add_argument('--console', '-c', action='store_true', help='Enter console mode')
     ap.add_argument('--no-templates', dest='templates', action='store_false', help='Do not use any preloaded templates, use backoff only')
-    ap.add_argument('input_file', type=str, help='Input file(s) to check')
-    ap.add_argument('output_file', type=str, help='Output file')
+
+    args, _ = ap.parse_known_args()
+
+    if not args.console:  # only require file arguments if not working on a console
+        ap.add_argument('input_file', type=str, help='Input file(s) to check')
+        ap.add_argument('output_file', type=str, help='Output file')
 
     args = ap.parse_args()
 
     logger.debug('Starting...')
     evaluator = Evaluator(args.type, args.templates)
-    predictions = evaluator.eval_file(args.input_file)
+    if args.console:
+        while evaluator.console():
+            pass
+    else:
+        predictions = evaluator.eval_file(args.input_file)
 
-    logger.debug('Evaluation...')
-    if args.eval:
-        predictions = evaluator.check_with_gold(predictions, args.input_file)
+        logger.debug('Evaluation...')
+        if args.eval:
+            predictions = evaluator.check_with_gold(predictions, args.input_file)
 
-    logger.debug('Writing output...')
-    with open(args.output_file, 'w', encoding='UTF-8') as fh:
-        json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
-    logger.debug('Done.')
+        logger.debug('Writing output...')
+        with open(args.output_file, 'w', encoding='UTF-8') as fh:
+            json.dump(predictions, fh, ensure_ascii=False, indent=4, cls=TripleJSONEnc)
+        logger.debug('Done.')
