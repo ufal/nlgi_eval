@@ -217,8 +217,14 @@ class Evaluator:
                    'N': len(y_pred)}
         if not fine:
             rec = sklearn.metrics.recall_score(y_gold, y_pred, pos_label='not OK')
+            pre = sklearn.metrics.precision_score(y_gold, y_pred, pos_label='not OK')
+            f1 = sklearn.metrics.f1_score(y_gold, y_pred, pos_label='not OK')
             logger.info('Recall: %.4f' % rec)
+            logger.info('Precision: %.4f' % pre)
+            loggel.info('F1: %.4f' % f1)
             results['recall'] = rec
+            results['precision'] = pre
+            results['f1'] = f1
 
         return results
 
@@ -238,7 +244,7 @@ class Evaluator:
         # metrics
         for threshold in [2.5, 2.0]:
             y_pred = ['OK' if inst['result'] == 'OK' else 'not OK' for inst in preds]
-            y_gold = ['OK' if inst['semantics'] >= 2.5 else 'not OK' for inst in golds]
+            y_gold = ['OK' if inst['semantics'] >= threshold else 'not OK' for inst in golds]
             logger.info('Threshold %.1f...' % threshold)
             results['metrics @ %.1f' % threshold] = self.compute_metrics(y_pred, y_gold)
 

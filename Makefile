@@ -93,5 +93,6 @@ run:
 	done; \
 	for file in data-webnlg/*; do \
 	    echo ">>>>" $$file "<<<<"; \
+	    base=`basename $$file`; \
 	    $(NLI_EVAL) -e -t webnlg $(PARAM) $$file $(TRY_DIR)/$$base.json; \
 	done' 2>&1 | tee $(TRY_DIR)/$(RUN_NAME).log
