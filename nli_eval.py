@@ -192,8 +192,8 @@ class Evaluator:
 
         return outputs
 
-    def compute_metrics(self, y_pred, y_gold, fine=False):
-        """Compute accuracy and confusion matrix."""
+    def compute_metrics(self, y_pred, y_gold, select=None, fine=False):
+        """Compute accuracy and confusion matrix. Compute recall for "not OK" if not in fine mode."""
         labels_order = ['OK', 'not OK']
         row_labels=['g_OK', 'g_not']
         col_labels=['p_OK', 'p_not']
@@ -202,20 +202,33 @@ class Evaluator:
             row_labels = ['g_OK', 'g_hal', 'g_om', 'g_h+o']
             col_labels = ['p_OK', 'p_hal', 'p_om', 'p_h+o']
 
+        if select:
+            y_gold = [y for (y, sel) in zip(y_gold, select) if sel]
+            y_pred = [y for (y, sel) in zip(y_pred, select) if sel]
+
         acc = sklearn.metrics.accuracy_score(y_gold, y_pred)
         conf_matrix = sklearn.metrics.confusion_matrix(y_gold, y_pred, labels=labels_order)
         conf_matrix = pd.DataFrame(conf_matrix, index=row_labels, columns=col_labels)
 
-        return acc, conf_matrix
+        logger.info('Accuracy: %.4f' % acc)
+        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
+        results = {'accuracy': acc,
+                   'conf_matrix': conf_matrix.to_dict('index'),
+                   'N': len(y_pred)}
+        if not fine:
+            rec = sklearn.metrics.recall_score(y_gold, y_pred, pos_label='not OK')
+            logger.info('Recall: %.4f' % rec)
+            results['recall'] = rec
+
+        return results
 
     def check_with_gold_webnlg(self, preds, gold_fname):
         """Evaluation for WebNLG (against the "semantics" column in human eval)."""
         golds = pd.read_csv(gold_fname, sep=',', encoding='UTF-8').to_dict('records')
-        for gold in golds:
-            gold['mr'] = [Triple.parse(t) for t in gold['mr'].split('<br>')]
-            gold['sent'] = gold['text']
 
+        max_len = 0
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
+            max_len = max(max_len, len(pred['mr']))
             # adding debug info
             pred['gold_human_rating'] = gold['semantics']
             if (pred['result'] == 'OK') != (gold['semantics'] >= 2.5):
@@ -226,10 +239,14 @@ class Evaluator:
         for threshold in [2.5, 2.0]:
             y_pred = ['OK' if inst['result'] == 'OK' else 'not OK' for inst in preds]
             y_gold = ['OK' if inst['semantics'] >= 2.5 else 'not OK' for inst in golds]
-            acc, conf_matrix = self.compute_metrics(y_pred, y_gold)
-            logger.info('Threshold %.1f -- Accuracy: %.4f' % (threshold, acc))
-            logger.info('Confusion matrix:\n%s' % str(conf_matrix))
-            results['metrics @ %.1f' % threshold] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
+            logger.info('Threshold %.1f...' % threshold)
+            results['metrics @ %.1f' % threshold] = self.compute_metrics(y_pred, y_gold)
+
+            for mr_len in range(1, max_len + 1):
+                select = [len(inst['mr']) == mr_len for inst in preds]
+                if any(select):
+                    logger.info('MR length == %d...' % mr_len)
+                    results['metrics @ %.1f' % threshold]['mr_len==%d' % mr_len] = self.compute_metrics(y_pred, y_gold, select=select)
 
         # correlation with humans
         conf_rho, conf_rho_p = scipy.stats.spearmanr([inst['OK_confidence'] for inst in preds],
@@ -244,8 +261,6 @@ class Evaluator:
         golds = pd.read_csv(gold_fname, sep='\t', encoding='UTF-8').to_dict('records')
         # adapt format to our output
         for gold in golds:
-            gold['mr'] = self.da_to_triples(DA.parse_diligent_da(gold['MR']))
-            gold['sent'] = gold['output']
             result = 'OK'
             if gold['added']:
                 result = 'hallucination'
@@ -253,7 +268,9 @@ class Evaluator:
                 result = 'hallucination+omission' if gold['added'] else 'omission'
             gold['result'] = result
 
+        max_len = 0
         for idx, (pred, gold) in enumerate(zip(preds, golds)):
+            max_len = max(max_len, len(pred['mr']))
             # adding debug info
             pred['gold_result'] = gold['result']
             if pred['result'] != gold['result']:
@@ -262,19 +279,28 @@ class Evaluator:
 
         results = {'predictions': preds}
         # metrics + rough metrics
+
         y_pred = [inst['result'] for inst in preds]
         y_gold = [inst['result'] for inst in golds]
-        acc, conf_matrix = self.compute_metrics(y_pred, y_gold, fine=True)
-        logger.info('Accuracy: %.4f' % acc)
-        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
-        results['metrics_fine'] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
+        logger.info('Computing Fine metrics...')
+        results['metrics_fine'] = self.compute_metrics(y_pred, y_gold, fine=True)
+        for mr_len in range(1, max_len + 1):
+            select = [len(inst['mr']) == mr_len for inst in preds]
+            if any(select):
+                logger.info('MR length == %d...' % mr_len)
+                results['metrics_fine']['mr_len==%d' % mr_len] = self.compute_metrics(y_pred, y_gold, select=select, fine=True)
 
         y_pred = ['OK' if inst == 'OK' else 'not OK' for inst in y_pred]
         y_gold = ['OK' if inst == 'OK' else 'not OK' for inst in y_gold]
-        acc, conf_matrix = self.compute_metrics(y_pred, y_gold, fine=False)
-        logger.info('Accuracy: %.4f' % acc)
-        logger.info('Confusion matrix:\n%s' % str(conf_matrix))
-        results['metrics_rough'] = {'accuracy': acc, 'conf_matrix': conf_matrix.to_dict('index')}
+
+        logger.info('Computing Rough metrics...')
+        results['metrics_rough'] = self.compute_metrics(y_pred, y_gold)
+        for mr_len in range(1, max_len + 1):
+            select = [len(inst['mr']) == mr_len for inst in preds]
+            if any(select):
+                logger.info('MR length == %d...' % mr_len)
+                results['metrics_rough']['mr_len==%d' % mr_len] = self.compute_metrics(y_pred, y_gold, select=select)
+
         return results
 
 
