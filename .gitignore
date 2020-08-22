@@ -1,2 +1,3 @@
 .*.swp
+.qsubmit-*.bash
 __pycache__
