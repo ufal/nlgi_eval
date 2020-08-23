@@ -128,8 +128,8 @@ class Evaluator:
         logger.debug("--> " + raw_results['mr2sent'])
         ent_confs.append(float(mr2sent[2]))
         mr2sent = ['C', 'N', 'E'][np.argmax(mr2sent)]
-        # sent -> mr (remove optional templates/triples)
-        sent2mr = self.roberta_classify(sent, ' '.join([t for t, o in zip(templs, opts) if o]))
+        # sent -> mr (remove optional templates/triples, where optional is True)
+        sent2mr = self.roberta_classify(sent, ' '.join([t for t, o in zip(templs, opts) if not o]))
         raw_results['sent2mr'] = "C: %.4f N: %.4f E: %.4f" % tuple(sent2mr)
         logger.debug("<-- " + raw_results['sent2mr'])
         ent_confs.append(float(sent2mr[2]))
