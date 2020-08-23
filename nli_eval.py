@@ -42,7 +42,7 @@ class TripleJSONEnc(json.JSONEncoder):
 
 class Evaluator:
 
-    def __init__(self, file_format, use_templates=True):
+    def __init__(self, file_format, use_templates=True, e2e_ignore_restaurant=False):
 
         self.use_gpu = torch.cuda.is_available()
         logger.debug('Use GPU: %r' % self.use_gpu)
@@ -65,13 +65,18 @@ class Evaluator:
         if file_format == 'webnlg':
             self.parse_data = self.parse_webnlg
             self.check_with_gold = self.check_with_gold_webnlg
+            self.e2e_ignore_restaurant = False  # E2E-only setting
         elif file_format == 'e2e':
             self.parse_data = self.parse_e2e
             self.check_with_gold = self.check_with_gold_e2e
+            self.e2e_ignore_restaurant = e2e_ignore_restaurant
         logger.debug('Ready.')
 
     def triples_to_templates(self, tripleset):
+        """Convert given triples to templates, return a list of flags telling which of them
+        should be optional (only used to ignore eatType=restaurant with the given global setting)."""
         output = []
+        optionals = []
         for triple in tripleset:
             if triple.predicate not in self.templates:
                 # if template isn't found, check remapping first
@@ -93,7 +98,11 @@ class Evaluator:
             template = template.replace('<object>', obj_str)
             template = template.replace('_', ' ')
             output.append(template)
-        return output
+            if self.e2e_ignore_restaurant and triple.predicate in ['eat_type', 'eatType'] and obj_str == 'restaurant':
+                optionals.append(True)  # if set so, eatType=restaurant is optional
+            else:
+                optionals.append(False)  # default: not optional
+        return output, optionals
 
     def roberta_classify(self, a, b):
         inputs = self.tokenizer("%s </s></s> %s" % (a, b), return_tensors="pt")
@@ -108,7 +117,8 @@ class Evaluator:
         return output
 
     def check_inst(self, mr, sent):
-        templs = self.triples_to_templates(mr)
+        # return templates + potentially mark some as optional (eatType=restaurant)
+        templs, opts = self.triples_to_templates(mr)
 
         logger.debug("%s\nTEMP: %s\nSENT: %s" % ("  ++  ".join([str(t) for t in mr]), ' '.join(templs), sent))
         ent_confs = []
@@ -118,8 +128,8 @@ class Evaluator:
         logger.debug("--> " + raw_results['mr2sent'])
         ent_confs.append(float(mr2sent[2]))
         mr2sent = ['C', 'N', 'E'][np.argmax(mr2sent)]
-        # sent -> mr
-        sent2mr = self.roberta_classify(sent, ' '.join(templs))
+        # sent -> mr (remove optional templates/triples)
+        sent2mr = self.roberta_classify(sent, ' '.join([t for t, o in zip(templs, opts) if o]))
         raw_results['sent2mr'] = "C: %.4f N: %.4f E: %.4f" % tuple(sent2mr)
         logger.debug("<-- " + raw_results['sent2mr'])
         ent_confs.append(float(sent2mr[2]))
@@ -137,7 +147,9 @@ class Evaluator:
 
         # sent -> mr for individual slots
         omitted = []
-        for triple, templ in zip(mr, templs):
+        for triple, templ, optional in zip(mr, templs, opts):
+            if optional:  # skip optional templates/triples
+                continue
             sent2triple = self.roberta_classify(sent, templ)
             ent_confs.append(float(sent2triple[2]))
             sent2triple = ['C', 'N', 'E'][np.argmax(sent2triple)]
@@ -281,6 +293,13 @@ class Evaluator:
         golds = pd.read_csv(gold_fname, sep='\t', encoding='UTF-8').to_dict('records')
         # adapt format to our output
         for gold in golds:
+            gold['diff'] = json.loads(gold['diff'])
+            if self.e2e_ignore_restaurant:
+                diff_eat_type = gold['diff'].get('eat_type', gold['diff'].get('eatType', {}))
+                if diff_eat_type.get('restaurant', 0) > 0:
+                    gold['added'] -= 1
+                elif diff_eat_type.get('restaurant', 0) < 0:
+                    gold['missing'] -= 1
             result = 'OK'
             if gold['added']:
                 result = 'hallucination'
@@ -297,7 +316,7 @@ class Evaluator:
             pred['gold_result'] = gold['result']
             if pred['result'] != gold['result']:
                 pred['error'] = True
-            pred['gold_diff'] = json.loads(gold['diff'])
+            pred['gold_diff'] = gold['diff']
 
         results = {'predictions': preds}
         # metrics + rough metrics
@@ -332,6 +351,7 @@ if __name__ == '__main__':
     ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
     ap.add_argument('--console', '-c', action='store_true', help='Enter console mode (input & output files not required/ignored)')
     ap.add_argument('--no-templates', dest='templates', action='store_false', help='Do not use any preloaded templates, use backoff only')
+    ap.add_argument('--e2e-ignore-restaurant', action='store_true', help='Be lenient about the eatType=restaurant value')
 
     args, _ = ap.parse_known_args()
 
@@ -342,7 +362,7 @@ if __name__ == '__main__':
     args = ap.parse_args()
 
     logger.debug('Starting...')
-    evaluator = Evaluator(args.type, args.templates)
+    evaluator = Evaluator(args.type, args.templates, args.e2e_ignore_restaurant)
     if args.console:
         while evaluator.console():
             pass
