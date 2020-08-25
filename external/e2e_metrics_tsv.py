@@ -6,7 +6,7 @@ import csv
 
 # CSV headers
 HEADER_SRC = r'(mr(?!_len)|src|source|meaning(?:[_ .-]rep(?:resentation)?)?|da|dial(?:ogue)?[_ .-]act)s?'
-HEADER_SYS = r'(out(?:put)?|ref(?:erence)?|sys(?:tem)?(?:[_ .-](?:out(?:put)?|ref(?:erence)?))?)s?'
+HEADER_SYS = r'(out(?:put)?|ref(?:erence)?|sys(?:tem)?(?![_ .-]id)(?:[_ .-](?:out(?:put)?|ref(?:erence)?))?)s?'
 HEADER_REF = r'(trg|tgt|target|ref(?:erence)?|human(?:[_ .-](?:ref(?:erence)?))?)s?'
 
 

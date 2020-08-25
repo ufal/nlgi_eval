@@ -213,7 +213,23 @@ class Evaluator:
                             'OK_confidence': OK_conf,
                             'omitted': omitted,
                             'raw_results': raw_results})
+        return outputs
 
+    def load_preds_from_file(self, in_fname, in_fname_preds):
+        """Instead of doing predictions, load them from a file -- to evaluate an external classifier."""
+        data = self.parse_data(in_fname)
+        with open(in_fname_preds, 'r', encoding='UTF-8') as fh:
+            preds = [l.strip().split("\t") for l in fh.readlines()]
+        assert len(preds) >= len(data) and len(preds) <= len(data) + 1
+        if len(preds) > len(data):  # skip header
+            preds = preds[1:]
+        outputs = []
+        for (mr, sent), (result, omitted, raw_results) in zip(data, preds):
+            outputs.append({'mr': mr,
+                            'sent': sent,
+                            'result': result,
+                            'omitted': omitted,
+                            'raw_results': raw_results})
         return outputs
 
     def compute_metrics(self, y_pred, y_gold, select=None, fine=False):
@@ -350,6 +366,7 @@ if __name__ == '__main__':
     ap.add_argument('--type', '-t', choices=['webnlg', 'e2e'], help='File format/domain templates setting', required=True)
     ap.add_argument('--eval', '-e', action='store_true', help='Input file has gold-standard predictions for evaluation')
     ap.add_argument('--console', '-c', action='store_true', help='Enter console mode (input & output files not required/ignored)')
+    ap.add_argument('--pred-from-file', '-p', type=str, help='Do not predict, load predictions from the given file (i.e. evaluate only)')
     ap.add_argument('--no-templates', dest='templates', action='store_false', help='Do not use any preloaded templates, use backoff only')
     ap.add_argument('--e2e-ignore-restaurant', action='store_true', help='Be lenient about the eatType=restaurant value')
 
@@ -367,7 +384,10 @@ if __name__ == '__main__':
         while evaluator.console():
             pass
     else:
-        predictions = evaluator.eval_file(args.input_file)
+        if args.pred_from_file:
+            predictions = evaluator.load_preds_from_file(args.input_file, args.pred_from_file)
+        else:
+            predictions = evaluator.eval_file(args.input_file)
 
         logger.debug('Evaluation...')
         if args.eval:
