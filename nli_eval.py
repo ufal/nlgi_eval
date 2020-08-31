@@ -216,20 +216,32 @@ class Evaluator:
         return outputs
 
     def load_preds_from_file(self, in_fname, in_fname_preds):
-        """Instead of doing predictions, load them from a file -- to evaluate an external classifier."""
+        """Instead of doing predictions, load them from a file -- to evaluate an external classifier
+        or rerun evaluation without re-classifying."""
         data = self.parse_data(in_fname)
-        with open(in_fname_preds, 'r', encoding='UTF-8') as fh:
-            preds = [l.strip().split("\t") for l in fh.readlines()]
-        assert len(preds) >= len(data) and len(preds) <= len(data) + 1
-        if len(preds) > len(data):  # skip header
-            preds = preds[1:]
-        outputs = []
-        for (mr, sent), (result, omitted, raw_results) in zip(data, preds):
-            outputs.append({'mr': mr,
-                            'sent': sent,
-                            'result': result,
-                            'omitted': omitted,
-                            'raw_results': raw_results})
+        # load a JSON prediction file, expecting the proper format
+        if in_fname_preds.endswith('.json'):
+            with open(in_fname_preds, 'r', encoding='UTF-8') as fh:
+                preds = json.load(fh)['predictions']
+            assert len(preds) == len(data)
+            for pred in preds:
+                if 'error' in pred:
+                    del pred['error']
+            return preds
+        # parse a TSV file: result/omitted/raw results assumed as columns
+        else:
+            with open(in_fname_preds, 'r', encoding='UTF-8') as fh:
+                preds = [l.strip().split("\t") for l in fh.readlines()]
+            assert len(preds) >= len(data) and len(preds) <= len(data) + 1
+            if len(preds) > len(data):  # skip header
+                preds = preds[1:]
+            outputs = []
+            for (mr, sent), (result, omitted, raw_results) in zip(data, preds):
+                outputs.append({'mr': mr,
+                                'sent': sent,
+                                'result': result,
+                                'omitted': omitted,
+                                'raw_results': raw_results})
         return outputs
 
     def compute_metrics(self, y_pred, y_gold, select=None, fine=False):
@@ -317,10 +329,13 @@ class Evaluator:
                 elif diff_eat_type.get('restaurant', 0) < 0:
                     gold['missing'] -= 1
             result = 'OK'
-            if gold['added']:
-                result = 'hallucination'
-            if gold['missing']:
-                result = 'hallucination+omission' if gold['added'] else 'omission'
+            if gold['valerr']:
+                result = 'hallucination+omission'
+            else:
+                if gold['added']:
+                    result = 'hallucination'
+                if gold['missing']:
+                    result = 'hallucination+omission' if gold['added'] else 'omission'
             gold['result'] = result
 
         max_len = 0
