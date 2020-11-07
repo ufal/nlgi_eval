@@ -10,9 +10,9 @@ import scipy
 
 from argparse import ArgumentParser
 from transformers import RobertaTokenizer, RobertaForSequenceClassification
-from tgen.data import DA
 from logzero import logger
 
+from external.tgen_data import DA
 from external.e2e_metrics_tsv import read_tsv
 from external.webnlg_entry import Triple
 import external.webnlg_parser as webnlg_parser
