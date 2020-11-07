@@ -19,8 +19,8 @@ import external.webnlg_parser as webnlg_parser
 
 
 TEMPLATE_PATHS = {
-    'e2e': 'fusenlg/data/e2e/templates_basic.json',
-    'webnlg': 'fusenlg/data/webnlg/templates.json',
+    'e2e': 'templates/e2e_templates.json',
+    'webnlg': 'templates/webnlg_templates.json',
 }
 
 # the templates are slightly different from what E2E evaluation produced => remap

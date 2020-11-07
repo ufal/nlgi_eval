@@ -1,0 +1,2265 @@
+{
+    "1st_runway_LengthFeet": [
+        "<subject> is 1st <object> runway length .",
+        "<object> feet is the length of the first runway at <subject> .",
+        "The length of the first runway at <subject> is <object> feet .",
+        "The 1st runway at <subject> is <object> feet in length .",
+        "The length of the 1st runway at <subject> is <object> feet .",
+        "The first runway of <subject> has a length of <object> feet .",
+        "<subject> 1st runway has a length of <object> feet .",
+        "The first runway length in feet of <subject> is <object> .",
+        "The length of the first runway of <subject> is <object> .",
+        "The length of the first runway at <subject> is <object> .",
+        "The 1st runway length in feet of <subject> is <object> .",
+        "The first runway of <subject> is <object> feet long ."
+    ],
+    "1st_runway_LengthMetre": [
+        "The length of the 1st runway at <subject> is <object> metres .",
+        "The length of the first runway at <subject> is <object> metres .",
+        "The length of the first runway at <subject> is <object> meters ."
+    ],
+    "1st_runway_Number": [
+        "<subject> 1st runway is Number <object> .",
+        "<subject> 1st runway has the number <object> .",
+        "<object> is the number of the first runway of <subject> ."
+    ],
+    "1st_runway_SurfaceType": [
+        "The 1st runway at <subject> has <object> .",
+        "The first runway at <subject> is made from <object> .",
+        "The 1st runway at <subject> is made from <object> .",
+        "The first runway of <subject> is made in <object> .",
+        "The surface of the 1st runway at <subject> is <object> .",
+        "The 1st runway at <subject> is made of <object> .",
+        "The first runway at <subject> is made of <object> ."
+    ],
+    "2nd_runway_SurfaceType": [
+        "<object> is the surface type of the second runway of <subject> .",
+        "The 2nd runway at <subject> is made of <object> ."
+    ],
+    "3rd_runway_LengthFeet": [
+        "The third runway at <subject> is <object> long .",
+        "The 3rd runway at <subject> is <object> feet .",
+        "<subject> 's 3rd runway length in ft is <object> .",
+        "<subject> 3rd runway length in ft is <object> .",
+        "The length of the 3rd runway at <subject> is <object> feet .",
+        "The 3rd runway at <subject> is <object> feet long .",
+        "<subject> 3rd runway length in feet is <object> .",
+        "The third runway length of <subject> is <object> .",
+        "<subject> 3rd runway length is ft is <object> .",
+        "The 3rd runway at <subject> is <object> feet in length ."
+    ],
+    "3rd_runway_SurfaceType": [
+        "The 3rd runway at <subject> is made of <object> .",
+        "<subject> 3rd runway surface type is <object> ."
+    ],
+    "4th_runway_LengthFeet": [
+        "The fourth runway at <subject> is <object> feet long .",
+        "<subject> 's 4th runway has a length in feet of <object> .",
+        "<subject> is 4th runway length feet of <object> ."
+    ],
+    "4th_runway_SurfaceType": [
+        "The 4th runway at <subject> has a surface of <object> .",
+        "The <subject> fourth runway is made of <object> .",
+        "The fourth runway at <subject> is made from <object> .",
+        "The fourth runway at <subject> is made of <object> .",
+        "The 4th runway at <subject> is made of <object> ."
+    ],
+    "5th_runway_Number": [
+        "<subject> 5th runway has the number <object> .",
+        "<object> is the number of the fifth runway of <subject> .",
+        "<subject> is 5th runway number <object> ."
+    ],
+    "CODEN_code": [
+        "The coden code for <subject> is <object> .",
+        "The CODEN code for <subject> is `` <object> '' .",
+        "<subject> has a CODEN code of `` <object> '' .",
+        "The code for <subject> is <object> .",
+        "<subject> has a Coden code of `` <object> '' .",
+        "<object> is the CODEN code for <subject> .",
+        "The CODEN code `` <object> '' is for <subject> .",
+        "<subject> has the CODEN code <object> .",
+        "The code of <subject> is <object> .",
+        "The CODEN code for <subject> is <object> .",
+        "The <subject> CODEN code is `` <object> '' .",
+        "<subject> has the CODEN Code <object> ."
+    ],
+    "EISSN_number": [
+        "The EISSN number of <subject> is <object> .",
+        "<subject> EISSN number is <object> .",
+        "<object> is the EISSN number for <subject> ."
+    ],
+    "IATA_Location_Identifier": [
+        "<object> is the IATA I.D. of <subject> .",
+        "<object> is the IATA location identifier for <subject> .",
+        "<subject> IATA Location Identifier is <object> .",
+        "The IATA Location Identifier of <subject> is <object> .",
+        "<object> is the ATA Location Identifier for <subject> ."
+    ],
+    "ICAO_Location_Identifier": [
+        "<object> is the ICAO Location Identifier of <subject> .",
+        "<object> is the ICAO location identifier of <subject> .",
+        "<subject> ICAO Location Identifier is <object> .",
+        "<object> is the ICAO location identifier of <subject> , .",
+        "The ICAO Location Identifier of <subject> is <object> .",
+        "The location identifier for <subject> is <object> .",
+        "<subject> ICAO location identifier is `` <object> '' ."
+    ],
+    "ISBN_number": [
+        "<subject> ISBN number is `` <object> '' .",
+        "<subject> has an ISBN number of `` <object> '' .",
+        "<subject> has an ISBN number <object> .",
+        "<subject> can be located by <subject> ISBN number `` <object> '' .",
+        "The ISBN number of <subject> is <object> .",
+        "<subject> has the ISBN number <object> .",
+        "<subject> has the ISBN number of `` <object> '' .",
+        "<subject> ' ISBN number is `` <object> '' .",
+        "<subject> ISBN number is <object> ."
+    ],
+    "ISSN_number": [
+        "<subject> has the ISSN number <object> .",
+        "<subject> has the ISSN number of <object> .",
+        "<subject> ISSN number : <object> .",
+        "<subject> is ISSN number <object> .",
+        "<subject> had the ISSN number <object> .",
+        "The ISSN number for <subject> is <object> .",
+        "The ISSN number `` <object> '' is for <subject> .",
+        "<subject> has the ISSN number of `` <object> '' .",
+        "The ISSN number of <subject> is <object> .",
+        "The <subject> ISSN number is `` <object> '' .",
+        "The <subject> ISSN number is <object> .",
+        "<subject> , ISSN number <object> .",
+        "ISSN number <object> is <subject> .",
+        "<subject> has an ISSN number of <object> .",
+        "<subject> has an ISSN number <object> ."
+    ],
+    "LCCN_number": [
+        "The LCCN number of <subject> is <object> .",
+        "<subject> has a LCCN number of <object> .",
+        "<subject> has the LCCN number <object> .",
+        "<object> is the LCCN number of <subject> .",
+        "<object> is the LCCN number for <subject> ."
+    ],
+    "LibraryofCongressClassification": [
+        "<object> is the Library of Congress Classification of `` <subject> '' .",
+        "The Library of Congress Classification of `` <subject> '' is <object> .",
+        "The Library of Congress Classification of <subject> is <object> ."
+    ],
+    "OCLC_number": [
+        "<subject> has a OCLC number of <object> .",
+        "The OCLC number of <subject> is <object> .",
+        "<subject> was assigned the OCLC number <object> .",
+        "<subject> has <object> .",
+        "<subject> has an OCLC number of <object> .",
+        "<object> is the OCLC number for <subject> .",
+        "<subject> has the OCLC number <object> ."
+    ],
+    "ReferenceNumber in the National Register of Historic Places": [
+        "<subject> ' reference number is <object> in the National Register of Historic Places .",
+        "`` <object> '' is <subject> ' reference number in the National Register of Historic Places .",
+        "<subject> has the reference number <object> in the National Register of Historic Places .",
+        "The Reference Number in the National Register of Historic Places of <subject> is <object> .",
+        "The reference number in the the National Register of Historic Places for <subject> is <object> .",
+        "<subject> has <object> in the National Register of Historic Places ."
+    ],
+    "UTCOffset": [
+        "<subject> time zone offset is <object> .",
+        "<subject> has an UTC offset of <object> .",
+        "<subject> has a UTC offset of <object> .",
+        "The UTC offset for <subject> is <object> .",
+        "The UTC offset in <subject> , is <object> ."
+    ],
+    "abbreviation": [
+        "<subject> has the abbreviation of <object> .",
+        "<object> is the abbreviated version of <subject> .",
+        "`` <object> '' is the abbreviation of <subject> .",
+        "<subject> is abbreivated to <object>",
+        "<subject> is also known by the abbreviated title of <object>",
+        "<subject> abbreviated name is <object> .",
+        "The abbreviation `` <object> '' is for <subject> .",
+        "<subject> is abbreviated <object> .",
+        "<subject> is abbreviated to <object> .",
+        "<object> is the abbreviation for <subject> .",
+        "The abbreviation of <subject> is <object> .",
+        "The abbreviation for <subject> is <object> .",
+        "<subject> is abbreviated to <object>",
+        "<subject> has the abbreviation of `` <object> '' ."
+    ],
+    "academicDiscipline": [
+        "The academic discipline of <subject> is <object> .",
+        "<subject> is part of the academic Discipline of <object> .",
+        "<subject> studiies <object> .",
+        "<subject> belongs to the academic discipline , <object> .",
+        "<object> is the academic discipine of <subject> .",
+        "<subject> is academically focused on <object> .",
+        "<subject> comes under the academic discipline of <object> .",
+        "<subject> is concerned with the academic discipline of <object> .",
+        "<subject> is devoted to the study of <object> .",
+        "<subject> is the academic discipline of <object> .",
+        "<subject> covers the discipline of <object> .",
+        "<subject> discipline is <object> ."
+    ],
+    "academicStaffSize": [
+        "<subject> academic staff total is <object> .",
+        "<subject> employs about <object> academic staff .",
+        "Approximately <object> employees make up the academic staff at <subject> .",
+        "The academic staff at <subject> number <object> .",
+        "<subject> has academic staff size of <object> .",
+        "<subject> has an academic staff of <object> ."
+    ],
+    "added to the National Register of Historic Places": [
+        "<subject> were added to the National Register of Historic Places on <object> .",
+        "<subject> was added to the National Register of Historic Places on <object> .",
+        "<subject> was added to the National Register of Historic Places on `` <object> '' ."
+    ],
+    "address": [
+        "The address of <subject> is <object> .",
+        "The address of <subject> is , <object> .",
+        "The address of <subject> is `` <object> '' .",
+        "<subject> is located on <object> ."
+    ],
+    "administrativeArrondissement": [
+        "<subject> is admin <object> .",
+        "<object> is the administrative arrondissement of <subject> .",
+        "The administrative Arrondissement of <subject> is <object> ."
+    ],
+    "administrativeCounty": [
+        "<subject> is found in the County of <object> ."
+    ],
+    "affiliation": [
+        "<subject> is affiliated with <object> .",
+        "<subject> is affiliated to <object> .",
+        "<subject> is affilaited with <object> ."
+    ],
+    "aircraftFighter": [
+        "<subject> aircraft fighter is called <object> .",
+        "<object> was a Fighter Aircraft of <subject> .",
+        "<subject> aircraft fighter is <object> .",
+        "<object> is an aircraft fighter in <subject> ."
+    ],
+    "aircraftHelicopter": [
+        "<subject> has an aircraft-capable helicopter known as <object> .",
+        "<object> is a Helicopter used by <subject> .",
+        "<object> is an aircraft helicopter of <subject> ."
+    ],
+    "almaMater": [
+        "The Alma Mater of <subject> is <object> .",
+        "<object> is <subject> almaMater .",
+        "<object> is the alma mater of <subject> .",
+        "<subject> was a student at <object> .",
+        "<subject> went to school at <object> .",
+        "<subject> attended <object> .",
+        "<object> is the alma mater for <subject> .",
+        "<subject> received <object> .",
+        "<subject> graduated from <object> .",
+        "<subject> received <object> from <subject> alma Mater ."
+    ],
+    "alternativeName": [
+        "<subject> alternative name is also <object> .",
+        "<object> is the alternative name for <subject> .",
+        "The alternative name for <subject> is <object> .",
+        "<object> , is the alternative name for <subject> .",
+        "<subject> is also known by <subject> name <object> .",
+        "<subject> can also be known as <object> .",
+        "The alternative name for <subject> is `` <object> '' .",
+        "<subject> is also known as <object> .",
+        "<subject> has different names including: <object> .",
+        "<object> is also known as <subject> in the comics genre .",
+        "<subject> has the alternative name , <object> .",
+        "<subject> alter ego is <object> .",
+        "An alternative name for <subject> is <object> .",
+        "`` <object> '' is known as <subject> .",
+        "<subject> has the alternative name <object> .",
+        "<subject> is also known as simply <object> .",
+        "<subject> is sometimes known as <object> .",
+        "<object> is also known by <subject> .",
+        "<subject> alternative name is <object> .",
+        "<object> is also known as <subject> .",
+        "<subject> is sometimes called `` <object> '' .",
+        "`` <object> '' is also known as <subject> .",
+        "<subject> is otherwise known as <object> .",
+        "The alternative name of <subject> is `` <object> '' ."
+    ],
+    "alternativeNames": [
+        "<subject> is also called <object> .",
+        "<subject> 's real name was <object> .",
+        "<object> was commonly known as <subject> ."
+    ],
+    "anthem": [
+        "The national anthem of <subject> is <object> !",
+        "<object> is the <subject> anthem .",
+        "<object> is the anthem of <subject> .",
+        "The anthem of <subject> is called <object> ."
+    ],
+    "architect": [
+        "<object> designed <subject> .",
+        "<object> were the architects who designed <subject> .",
+        "The architect of <subject> was <object> .",
+        "<object> is the architect who designed <subject> .",
+        "<object> were the architects of <subject> .",
+        "<object> was the architect of <subject> .",
+        "<subject> was designed by <object> .",
+        "<subject> architect was <object> .",
+        "The architect of <subject> is <object> .",
+        "<object> is the architect of <subject> .",
+        "<object> is the architect for <subject> .",
+        "<subject> was designed by the architects of the <object> .",
+        "The architect responsible for <subject> was <object> ."
+    ],
+    "architecturalStyle": [
+        "The architecture style of <subject> falls under <object> .",
+        "The architecture style of <subject> is <object> .",
+        "<subject> are in the architectural sytle of <object> .",
+        "<subject> has the architectural style of <object> .",
+        "<subject> has <object> .",
+        "The architectural style of <subject> is <object> .",
+        "<subject> has an <object> style architecture .",
+        "<subject> are in the architectural style of <object> .",
+        "<subject> was built in the <object> style .",
+        "The <subject> architectural style is that of <object> .",
+        "<subject> have the architectural style of <object> .",
+        "<subject> have <object> style of architecture .",
+        "<subject> style of architecture is <object> .",
+        "<subject> is in the architectural style of `` <object> '' ."
+    ],
+    "areaCode": [
+        "<subject> has an area code of <object> .",
+        "<object> is the area code for <subject> .",
+        "<subject> has the area code of <object> .",
+        "The ares codes of <subject> are <object> .",
+        "The area codes in <subject> are <object> .",
+        "The area codes for <subject> are <object> .",
+        "<subject> , has the area code , <object> .",
+        "The area code of <subject> , is <object> .",
+        "<object> are area codes for <subject> .",
+        "Area codes for <subject> are : <object> .",
+        "<subject> has area codes <object> .",
+        "<object> is the area code of <subject>",
+        "The area code in <subject> is <object> .",
+        "The area code for <subject> is <object> .",
+        "The area code of <subject> is <object> .",
+        "<subject> has the area code : <object> .",
+        "<subject> has the area codes <object> ."
+    ],
+    "areaOfLand": [
+        "<subject> has an area of land of <object> .",
+        "<subject> covers <object> .",
+        "<subject> covers an area of <object> .",
+        "The land area , of <subject> , is <object> .",
+        "<subject> has a land area of <object> .",
+        "<subject> covers <object> of land .",
+        "<subject> has a area of land that measures <object> ."
+    ],
+    "areaOfWater": [
+        "There are <object> of water in <subject> .",
+        "<subject> has an area of water that is <object> .",
+        "The total area of water in <subject> is <object> .",
+        "<subject> has a water area of <object> .",
+        "There is <object> of water in <subject> .",
+        "<subject> has a total area of water of <object> .",
+        "The area of water within <subject> is <object> .",
+        "The area of water with <subject> , is <object> .",
+        "<object> is the area of water in <subject> .",
+        "The area of water , in <subject> , is <object> .",
+        "There is a total area of <object> of water in <subject> .",
+        "<subject> has <object> of water .",
+        "The area of water in <subject> , is <object> .",
+        "<subject> has an area of water <object> ."
+    ],
+    "areaTotal": [
+        "The total area of <subject> is <object> .",
+        "<subject> has a total are of <object> .",
+        "<subject> , whose total area is <object> .",
+        "The total area in <subject> is <object> .",
+        "The total area for <subject> is <object> .",
+        "<subject> , has a total area of <object> .",
+        "<subject> occupies <object> .",
+        "The total area of <subject> , is <object> .",
+        "<subject> has an area of <object> .",
+        "The total area , of <subject> , is <object> .",
+        "<subject> has a total area of <object> .",
+        "The area of <subject> is <object> ."
+    ],
+    "attackAircraft": [
+        "<object> can be found on <subject> .",
+        "<object> is an attack aircraft of <subject> ."
+    ],
+    "author": [
+        "<object> is the author of <subject> .",
+        "The authors of <subject> are <object> .",
+        "<subject> ' author was <object> .",
+        "<object> authored <subject> .",
+        "<subject> was written by <object> .",
+        "The author of <subject> is <object> .",
+        "<subject> was authored by <object> .",
+        "<subject> was penned by <object> .",
+        "<subject> is written by <object> ."
+    ],
+    "award": [
+        "<subject> won an award at <object> .",
+        "<subject> won an award from <object> .",
+        "<subject> has won <object> .",
+        "<subject> has been awarded by <object> .",
+        "<subject> has won awards from <object> .",
+        "<subject> has been awarded <object> .",
+        "<subject> received an award from <object> .",
+        "<subject> was awarded an award by <object> .",
+        "<subject> won <object> .",
+        "<subject> received <object> in the comics field .",
+        "<subject> was an award winner at <object> .",
+        "<subject> is an <object> winner .",
+        "<subject> was awarded <object> .",
+        "<subject> collected an award from <object> ."
+    ],
+    "awards": [
+        "The number of <subject> 's awards are <object> .",
+        "<subject> has won <object> awards .",
+        "<subject> received <object> awards .",
+        "<subject> won <object> awards .",
+        "<subject> had <object> awards ."
+    ],
+    "backup pilot": [
+        "<object> was a backup pilot of <subject> .",
+        "<subject> 's backup pilot was <object> .",
+        "<object> was the backup pilot of <subject> ."
+    ],
+    "battles": [
+        "<subject> battled in <object> .",
+        "<subject> was involved in battles at <object> .",
+        "One of the noted <subject> battles was <object> .",
+        "<object> is one of the battles of <subject> .",
+        "<object> was a battle involving <subject> .",
+        "<subject> was involved in <object> .",
+        "<subject> has fought in <object> .",
+        "<subject> fought battles in <object> ."
+    ],
+    "bedCount": [
+        "<subject> has <object> beds .",
+        "The bed count of <subject> is <object> ."
+    ],
+    "bird": [
+        "<subject> bird is <object> .",
+        "<object> is a bird living in <subject> .",
+        "<object> is a bird found in <subject> .",
+        "<object> is a <subject> bird .",
+        "<object> is a native bird to <subject> ."
+    ],
+    "birthDate": [
+        "<subject> was born <object> .",
+        "<subject> 's birth date is <object> .",
+        "<subject> 's birth date was <object> .",
+        "<subject> was born on <object> ."
+    ],
+    "birthName": [
+        "<subject> was born <object> .",
+        "<subject> 's full name was `` <object> '' .",
+        "<subject> was born as <object> .",
+        "<subject> was born with <object> .",
+        "<subject> 's birth name was <object> .",
+        "<subject> 's birth name is <object> ."
+    ],
+    "birthPlace": [
+        "<subject> birth place is <object> .",
+        "<subject> 's birth place was <object> .",
+        "Architect , <subject> was born in <object> .",
+        "<subject> 's birth place is <object> .",
+        "<subject> was born in <object> .",
+        "The birth place of <subject> is <object> .",
+        "<subject> 's birthplace is <object> .",
+        "<object> is the birthplace of <subject> ."
+    ],
+    "buildingStartDate": [
+        "<subject> opened in <object> .",
+        "The start date of <subject> was <object> .",
+        "The building of <subject> was started in <object> .",
+        "<subject> originated in <object> .",
+        "<subject> was built in <object> .",
+        "<subject> building start date was in <object> .",
+        "<subject> was begun to be built in <object> .",
+        "The construction of <subject> began in <object> .",
+        "The building at <subject> was started to be erected in <object> .",
+        "<object> was the start date for the building at <subject> .",
+        "They started to build <subject> in <object> .",
+        "Construction of <subject> began in <object> .",
+        "They started to build <subject> on <object> .",
+        "The building of <subject> began in <object> .",
+        "Building started on <subject> in <object> .",
+        "<object> is the building start date of <subject> .",
+        "The start date for building <subject> was <object> ."
+    ],
+    "buildingType": [
+        "<subject> hosts <object> .",
+        "<subject> is the seat of <object> .",
+        "<subject> is <object> type building .",
+        "<subject> is <object> ."
+    ],
+    "capital": [
+        "The capital of <subject> is <object>",
+        "<object> is <subject> .",
+        "<object> is the capital city of <subject> .",
+        "The capital of <subject> is <object> .",
+        "<object> is the capital of <subject> .",
+        "<subject> capital is <object> .",
+        "The capital city of <subject> is <object>",
+        "<object> is the capital of <subject>",
+        "<object> is the Capital of <subject> ."
+    ],
+    "carbohydrate": [
+        "<subject> have <object> of carbohydrates .",
+        "<subject> have <object> of carbs ."
+    ],
+    "category": [
+        "<subject> falls under the category of <object> .",
+        "<subject> is categorised as <object> .",
+        "<subject> belongs to the category of <object> .",
+        "<subject> is categorized as <object> ."
+    ],
+    "chairman": [
+        "<subject> chairman is <object> .",
+        "The chairman of <subject> is <object> .",
+        "<object> is the chairman of <subject> .",
+        "<object> is chairman of <subject> ."
+    ],
+    "chairmanTitle": [
+        "The title of the chairman of <subject> is <object> ."
+    ],
+    "chairperson": [
+        "The chair of <subject> is <object> ."
+    ],
+    "champions": [
+        "<object> are <subject> Champions .",
+        "<object> were past champions in <subject> .",
+        "<object> are the champions of <subject> .",
+        "<subject> champions are <object>",
+        "<object> won the championship before in <subject> .",
+        "<object> have been <subject> champions .",
+        "<object> are previous champions of <subject> .",
+        "<object> are champions of <subject>",
+        "The name of the championship football team in <subject> <object> .",
+        "<object> won <subject> before .",
+        "<object> have been champions of <subject>",
+        "<subject> champions include <object> .",
+        "<object> are previous champions of <subject>",
+        "<object> are former champions of <subject>",
+        "The champions of <subject> are <object> .",
+        "<object> were champions at <subject>",
+        "<object> are the champions of <subject>",
+        "The <subject> champions are <object>"
+    ],
+    "chancellor": [
+        "The Chancellor of <subject> is <object> .",
+        "<object> served as chancellor of <subject> .",
+        "<object> is the chancellor of <subject> ."
+    ],
+    "city": [
+        "<subject> is situated in the city of <object> .",
+        "<subject> is in the city of <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is located in the city of <object> .",
+        "<subject> is in <object> ."
+    ],
+    "cityServed": [
+        "<subject> city served <object> .",
+        "<subject> serves the city of <object> .",
+        "<subject> serves <object> .",
+        "<subject> served <object> .",
+        "<subject> is the airport of <object> .",
+        "The city of <object> is served by <subject> .",
+        "<object> is a city which is served by <subject> .",
+        "<subject> serves <object>",
+        "<object> is served by <subject> ."
+    ],
+    "class": [
+        "<subject> is in the class <object> .",
+        "<subject> class is <object> ."
+    ],
+    "club": [
+        "<subject> plays at <object> .",
+        "<subject> has represented <object> .",
+        "<subject> has been associated with <object> .",
+        "<subject> was a footballer for <object> .",
+        "<subject> played for <object> .",
+        "<subject> is a member of <object> .",
+        "<subject> plays at the <object> club .",
+        "<subject> is a footballer with <object>",
+        "<subject> has been manager of <object> .",
+        "<subject> plays for <object> .",
+        "<subject> is part of <object> .",
+        "<subject> played for <object>",
+        "<subject> is a member of the <object> .",
+        "<subject> owns <object>",
+        "<subject> was once a player for <object> .",
+        "<subject> was attached to <object> .",
+        "<subject> used to be at <object>",
+        "<subject> club was <object> .",
+        "<subject> is at the <object> .",
+        "<subject> is a footballer in <object> .",
+        "<subject> football club was <object>",
+        "<subject> is in the <object> club .",
+        "<subject> club is <object>",
+        "<subject> is a player of <object> .",
+        "<subject> plays at <object>",
+        "<subject> is <object> .",
+        "<subject> is in <object> .",
+        "<subject> played football for <object> .",
+        "<subject> is part of the <object> .",
+        "<subject> is affiliated with <object>",
+        "The first club <subject> played for was <object> .",
+        "<subject> once played for <object> .",
+        "<subject> is in the <object> .",
+        "<subject> is associated with <object> .",
+        "<subject> is a player in <object> .",
+        "<subject> is a player at <object> .",
+        "<subject> is affiliated with the <object> .",
+        "<subject> is at <object> .",
+        "<subject> is a member of the ! <object> .",
+        "<subject> was a player for <object> .",
+        "<subject> plays for <object>",
+        "<subject> played football for <object>",
+        "<subject> is a member of <object>",
+        "<subject> plays at the <object> .",
+        "<subject> is attached to <object> .",
+        "<subject> club is <object> .",
+        "<subject> was at <object> ."
+    ],
+    "commander": [
+        "<object> was the commander of <subject> .",
+        "The <subject> commander was <object> .",
+        "<object> was the <subject> commander .",
+        "<subject> was commanded by <object> .",
+        "<object> was an <subject> Commander ."
+    ],
+    "compete in": [
+        "<subject> is competing in <object> .",
+        "<subject> will compete in <object> .",
+        "<subject> competed in <object> ."
+    ],
+    "completionDate": [
+        "The construction of <subject> was completed in <object> .",
+        "<subject> was completed in <object> .",
+        "<subject> was completed on <object> .",
+        "<subject> was finished in <object> .",
+        "<subject> completion date was in <object> .",
+        "<subject> was completed on `` <object> '' .",
+        "The building of <subject> was completed in <object> .",
+        "The building at <subject> was completed in <object> .",
+        "The completion date of <subject> is <object> ."
+    ],
+    "cost": [
+        "The cost of <subject> is <object> .",
+        "The cost to build <subject> is `` <object> '' ."
+    ],
+    "country": [
+        "<subject> is situated within <object> .",
+        "<subject> is a dish found in <object>",
+        "<subject> is an <object> novel .",
+        "<subject> are from <object> .",
+        "<subject> originates from the country of <object> .",
+        "The country of <subject> is <object> .",
+        "<object> claim to have invented <subject> .",
+        "<subject> , is within <object> .",
+        "<subject> is from the country of <object> .",
+        "<object> is <subject> comes from .",
+        "<subject> , is part of <object> .",
+        "<subject> is a popular tourist destination in <object> .",
+        "<subject> is part of <object> .",
+        "<subject> is situated in <object> .",
+        "<subject> is thought to have originated in <object> .",
+        "<subject> is a popular dish in <object> .",
+        "<subject> is a dish commonly found in <object> .",
+        "The country of <object> commonly serves <subject> .",
+        "<subject> is part of the country of <object> .",
+        "The country of <subject> , is <object> .",
+        "<subject> originates from <object> .",
+        "<subject> is located within the country of <object> .",
+        "<subject> is located in <object> .",
+        "<subject> , which is in <object> , .",
+        "<subject> comes from the countries of <object> .",
+        "<subject> is published in <object> .",
+        "<subject> comes from the country of <object> .",
+        "<subject> is a traditional <object> sauce .",
+        "<subject> is in <object>",
+        "<subject> is <object> .",
+        "<subject> located in <object> .",
+        "<subject> is in <object> .",
+        "<subject> is from <object> .",
+        "<subject> is a traditional dish from <object> .",
+        "<object> is the country <subject> comes from .",
+        "<subject> is popular in <object> .",
+        "The country that <subject> comes from is <object> .",
+        "<subject> is found in <object> .",
+        "<subject> is found in the country of <object> .",
+        "<subject> is within <object> .",
+        "<subject> are popular in <object> .",
+        "<subject> is a dish from the country of <object> .",
+        "<subject> , which is <object> .",
+        "<subject> is a country in <object> .",
+        "<subject> is located within <object> .",
+        "<subject> is a state is <object> .",
+        "The country <subject> come from is <object> .",
+        "<subject> is a city in <object> .",
+        "<subject> comes from is <object> .",
+        "<subject> can be found in <object> .",
+        "<subject> in <object> .",
+        "<subject> is a dish from <object> .",
+        "<subject> is a dish found in the country of <object> .",
+        "<subject> is made in <object> .",
+        "<subject> is found in the countries of <object> .",
+        "<subject> is a food found in <object> .",
+        "<subject> can be found in the country of <object> .",
+        "<subject> is based in <object> .",
+        "<subject> was written in <object>",
+        "<subject> comes from <object> .",
+        "<subject> was written in <object> .",
+        "<subject> is a popular food of <object> .",
+        "<subject> is a dish traditional in <object> .",
+        "<subject> was written by <object> .",
+        "<object> is the country of <subject> .",
+        "<subject> state is in <object> .",
+        "<subject> is a dish that is popular in <object> .",
+        "<subject> is published by <object> .",
+        "<subject> is located in <object>",
+        "<subject> in <object>",
+        "<object> is the country of origin of <subject> .",
+        "<subject> is a dish in <object> .",
+        "<subject> is located in the country of <object> .",
+        "<subject> is in the country of <object> ."
+    ],
+    "countySeat": [
+        "The county seat of <subject> is <object> .",
+        "The County Seat for <subject> is in <object> .",
+        "<object> is the county seat of <subject> .",
+        "<subject> county seat is <object> .",
+        "<subject> with the county seat being <object> .",
+        "<object> is the county seat for <subject> .",
+        "<object> is the County seat of <subject> ."
+    ],
+    "course": [
+        "<subject> is served at <object> .",
+        "<subject> is classed as <object> .",
+        "<subject> should be served as <object> .",
+        "<subject> can be served as <object> .",
+        "<subject> is a dish served for <object> .",
+        "<subject> is <object> .",
+        "<subject> is a dish served as <object> course .",
+        "<subject> can be found in <object> .",
+        "<subject> is a type of <object> ."
+    ],
+    "creator": [
+        "The creator of <subject> is <object> .",
+        "<object> is the creator of <subject> .",
+        "<subject> is a fictional character created by <object> .",
+        "<subject> is created by <object> .",
+        "<subject> was created by <object> in the comics genre .",
+        "<subject> , The Arrow , was created by <object> .",
+        "<subject> was created by <object> .",
+        "<object> was one of the creators of <subject> .",
+        "<object> created <subject> .",
+        "<subject> is a comic character created by <object> .",
+        "<subject> was created in <object> .",
+        "<subject> , was created by <object> .",
+        "<object> was the creator of <subject> ."
+    ],
+    "creatorOfDish": [
+        "<subject> is a dish that was created within <object> .",
+        "<object> has resulted in the creation of the dish <subject> ."
+    ],
+    "crewMembers": [
+        "<object> was a crew member of <subject> .",
+        "<object> was a crewman aboard <subject> .",
+        "<subject> crew members included <object> .",
+        "<object> was a member of the crew on <subject> .",
+        "<object> was a crew member on <subject> ."
+    ],
+    "currency": [
+        "In <subject> the currency is <object> .",
+        "the currency of <subject> is <object> .",
+        "the currency used in <subject> is <object> .",
+        "<subject> 's currency is <object> .",
+        "<object> is the money used in <subject> .",
+        "The currency in <subject> is <object> .",
+        "Money used in <subject> is <object> .",
+        "Money in <subject> is called <object> .",
+        "<subject> uses <object> for <subject> currency .",
+        "<object> is the currency in <subject> .",
+        "<subject> currency is <object> .",
+        "The currency of <subject> is <object> ."
+    ],
+    "currentTenants": [
+        "<object> is the current tenants of <subject> .",
+        "<object> is the current tenant of <subject> ."
+    ],
+    "dateOfRetirement": [
+        "<subject> retired on <object> .",
+        "<subject> retired in <object> .",
+        "<subject> date of retirement was <object> .",
+        "<subject> 's retirement date is `` <object> '' .",
+        "<subject> retired <object> .",
+        "<subject> 's retirement was in <object> ."
+    ],
+    "dean": [
+        "The dean of <subject> is <object> .",
+        "<subject> dean is <object> ."
+    ],
+    "deathDate": [
+        "<subject> died on <object> .",
+        "<subject> died <object> ."
+    ],
+    "deathPlace": [
+        "<subject> died in <object> ."
+    ],
+    "dedicatedTo": [
+        "<subject> has been dedicated to <object> .",
+        "<subject> is dedicated to <object> ."
+    ],
+    "demonym": [
+        "The demonym for natives of <subject> is <object> .",
+        "The demonym for people living in <subject> is <object> .",
+        "The people of <subject> are known as <object> .",
+        "The inhabitants of <subject> are known as <object> .",
+        "<object> are the inhabitants of <subject> .",
+        "<object> is a demonym term used in <subject> .",
+        "The inhabitants of <subject> have <object> .",
+        "<object> live in <subject>",
+        "<object> are the people occupying <subject>",
+        "The people from <subject> are called <object> .",
+        "<object> is the name for the people of <subject> .",
+        "<object> live in <subject> .",
+        "<object> inhabit <subject>",
+        "<object> is the name given to people from <subject> .",
+        "<object> are the people who live in <subject> .",
+        "<subject> demonym is <object> .",
+        "The inhabitants of <subject> have the demonym of <object> .",
+        "<object> inhabit <subject> .",
+        "The demonym of the inhabitants of <subject> is <object> .",
+        "<subject> is populated by <object> .",
+        "<object> are from <subject> .",
+        "<subject> is inhabited by <object> .",
+        "The demonym of natives of <subject> is <object> .",
+        "The people of <subject> are called <object> ."
+    ],
+    "designer": [
+        "<subject> designer was <object> .",
+        "<object> designed <subject> .",
+        "<subject> was designed by <object> .",
+        "The designers of <subject> are <object> .",
+        "<object> are the designers of <subject> ."
+    ],
+    "developer": [
+        "<object> were developers of <subject> .",
+        "<subject> was developed by <object> .",
+        "The developer of <subject> is <object> ."
+    ],
+    "director": [
+        "The director of <subject> is <object> .",
+        "<object> is the director of <subject> .",
+        "<subject> director is <object> ."
+    ],
+    "dishVariation": [
+        "<subject> can be made with <object> .",
+        "<object> is a variation on <subject> .",
+        "<subject> and <object> are variations of the same dish .",
+        "<object> is one variation of ingredients in <subject> .",
+        "<object> is a variation of <subject> .",
+        "<object> and <subject> are variation of the same dish .",
+        "<subject> can be varied by using <object> .",
+        "<object> can be included in <subject> .",
+        "<object> is one of the ingredients that can be used in a variation of <subject> .",
+        "One variation of <subject> uses <object> as part of <subject> dish .",
+        "Another variation for <subject> is <object> .",
+        "<subject> can be varied by adding <object> .",
+        "<subject> is <object> .",
+        "<object> is a type of <subject> .",
+        "A variation of <subject> includes <object> .",
+        "a variation of <subject> is to use <object> .",
+        "<subject> is a variation on <object> .",
+        "<object> can be added to <subject> .",
+        "As a dish variation on <subject> , <object> can be used .",
+        "A variation of <subject> contains <object> .",
+        "A variant of <subject> is <object> .",
+        "<subject> has <object> as a variation .",
+        "One dish variation called <subject> is the use of <object> in the recipe .",
+        "<object> is a dish that can be served as <subject> .",
+        "<object> can be used as a variation in <subject> .",
+        "<object> is <subject> .",
+        "<subject> is a variation of the <object> dish .",
+        "To vary <subject> , <object> may be used .",
+        "<subject> is a variation of <object> .",
+        "<object> is a dish variation of <subject> .",
+        "<object> can be added to barny <subject> .",
+        "A variation of <subject> is <object> ."
+    ],
+    "distributor": [
+        "The distributor of <subject> is <object> .",
+        "<object> is the distributor of <subject> .",
+        "<subject> was a film distributed by <object> ."
+    ],
+    "district": [
+        "<subject> is found in <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is located on <object> .",
+        "<subject> is located in the district of <object> ."
+    ],
+    "division": [
+        "<subject> belongs to <object> .",
+        "<subject> is classed as <object> .",
+        "<subject> belongs to the division of <object> .",
+        "<subject> are in the division of <object> .",
+        "<subject> is part of the <object> division ."
+    ],
+    "doctoralAdvisor": [
+        "<subject> doctoral advisor was <object> .",
+        "<subject> is the doctoral advisor for <object> .",
+        "<subject> doctoral advisor to <object> ."
+    ],
+    "editor": [
+        "<subject> was edited by <object> .",
+        "<object> is the editor of <subject> .",
+        "The editor of <subject> is <object> .",
+        "The editors of <subject> are <object> ."
+    ],
+    "elevationAboveTheSeaLevel": [
+        "<subject> is situated at <object> above sea level .",
+        "<subject> has an elevation above sea level of <object> .",
+        "<subject> has an elevation of <object> above sea level .",
+        "<subject> elevation is <object> above the sea level .",
+        "The elevation above the sea level in <subject> , is <object> .",
+        "<subject> is elevated <object> above sea level .",
+        "<subject> is <object> above sea level .",
+        "The elevation above the sea level for <subject> , is <object> .",
+        "<subject> is at a height of <object> above sea level .",
+        "<subject> is located at <object> above sea level ."
+    ],
+    "elevationAboveTheSeaLevel_(in_feet)": [
+        "<subject> has an elevation of <object> feet above sea level .",
+        "<subject> is <object> feet above sea level .",
+        "<subject> is <object> ft above sea level .",
+        "<subject> is elevated <object> feet above sea level .",
+        "<subject> has an elevation above the sea level (in feet) of <object> .",
+        "The elevation above sea level for <subject> is <object> ."
+    ],
+    "elevationAboveTheSeaLevel_(in_metres)": [
+        "The <subject> elevation above the sea level (in meters) is <object> .",
+        "<subject> is at an elevation of <object> from sea level .",
+        "The elevation above the sea level (in metres) of <subject> is <object> .",
+        "<subject> is <object> meters above sea level .",
+        "<subject> has an elevation of <object> metres above sea level .",
+        "<subject> is at an elevation of <object> above seal level .",
+        "<subject> is located <object> metres above sea level .",
+        "<subject> has the elevation of <object> above the sea level .",
+        "<subject> is <object> metres above the sea level .",
+        "<subject> is <object> metres above sea level .",
+        "<subject> above the sea level in metres is <object> .",
+        "<subject> is located <object> above sea level .",
+        "<subject> elevation above the sea level in metres is <object> .",
+        "<subject> is elevated <object> metres above sea level .",
+        "<subject> is <object> above sea level ."
+    ],
+    "established": [
+        "<subject> was established <object> .",
+        "<subject> was established in <object> .",
+        "<subject> was established on <object> .",
+        "<subject> is established in <object> ."
+    ],
+    "ethnicGroup": [
+        "<object> are an ethic group in <subject> .",
+        "The ethnic group of <subject> is <object> .",
+        "<object> is one of the ethnic groups on <subject> .",
+        "<subject> has an ethnic group called <object> .",
+        "The ethnic group for <subject> is <object> .",
+        "One the ethnic groups on <subject> is <object> .",
+        "<object> is the ethnic group in <subject> .",
+        "<object> are an ethnic group of <subject> .",
+        "<object> are one of the ethnic groups in <subject> .",
+        "One of the ethnic groups in <subject> are <object> .",
+        "<object> people are from <subject> .",
+        "<subject> has many ethnic groups one of which are <object> .",
+        "In <subject> there is an ethnic group of <object> .",
+        "One <subject> ethnic group is <object> .",
+        "<object> live in <subject> .",
+        "There is an ethnic group of <object> in <subject> .",
+        "one of the ethnic groups of <subject> is <object> .",
+        "One of the ethnic groups of <subject> are <object> .",
+        "<object> is an ethnic group from <subject> .",
+        "One of <subject> ethnic groups are <object> .",
+        "<object> are an ethnic group in <subject>",
+        "<object> is an ethnic group in <subject> .",
+        "<object> are one of the ethnic groups of <subject> .",
+        "<object> are part of one of the ethnic groups in <subject> .",
+        "The main ethnic group in <subject> is <object> .",
+        "<object> form one of the ethnic groups in <subject> .",
+        "<object> ethnicity are from <subject> .",
+        "<object> are an ethnic group within <subject> .",
+        "One of the ethnic groups within <subject> is <object> .",
+        "<subject> has an ethnic group of <object> .",
+        "In <subject> one of the ethnic groups is <object> .",
+        "<object> is an ethnic group found in <subject> .",
+        "One of the ethnic groups in <subject> is <object> .",
+        "<object> are a group in <subject> .",
+        "<object> are an ethnic group in <subject> .",
+        "<object> are an ethnic group from <subject> .",
+        "An ethnic group of <subject> is <object> .",
+        "<subject> is an ethnic group of <object> .",
+        "<object> are the ethnic group of <subject> ."
+    ],
+    "ethnicGroups": [
+        "<object> are <subject> ethnic group .",
+        "One of the ethnic groups found in <subject> is <object> ."
+    ],
+    "family": [
+        "<subject> comes from the <object> family .",
+        "<subject> comes under the family of <object> .",
+        "<subject> belongs to the <object> family .",
+        "<subject> belongs to <object> .",
+        "<subject> is classed as <object> .",
+        "<subject> is a member of <object> .",
+        "<subject> belongs to the family of <object> .",
+        "<subject> is part of the family of <object> .",
+        "<subject> is in the family of <object> .",
+        "<subject> is part of the <object> family .",
+        "<subject> is part of <object> .",
+        "<subject> is a member of the <object> family .",
+        "<subject> are from the <object> family .",
+        "<subject> is a member of the family <object> ."
+    ],
+    "fat": [
+        "<subject> contain <object> of fat ."
+    ],
+    "firstAppearanceInFilm": [
+        "<object> was <subject> first film appearance .",
+        "<subject> first appeared in <object> .",
+        "The first appearance in a film for <subject> was <object> ."
+    ],
+    "firstPublicationYear": [
+        "<subject> was first published in <object> ."
+    ],
+    "floorArea": [
+        "<subject> has a floor area of <object> .",
+        "The floor area of <subject> is <object> .",
+        "<subject> has a <object> floor area .",
+        "<subject> is <object> ."
+    ],
+    "floorCount": [
+        "<subject> has a floor count of <object> .",
+        "<subject> has <object> floors .",
+        "There are a total of <object> floors in <subject> .",
+        "The building at <subject> has <object> floors .",
+        "There are <object> floors in <subject> .",
+        "<subject> <object> floors .",
+        "There are <object> floors at <subject> ."
+    ],
+    "followedBy": [
+        "<object> is a sequel to <subject> .",
+        "<subject> was followed by <object> .",
+        "<object> was preceded by <subject> .",
+        "<subject> was followed up by <object> .",
+        "<object> followed `` <subject> '' .",
+        "<subject> is followed by <object> .",
+        "<object> followed <subject> .",
+        "<object> is the sequel to <subject> ."
+    ],
+    "formerName": [
+        "The previous name of <subject> was <object> .",
+        "<subject> was formerly called <object> ."
+    ],
+    "fossil": [
+        "<object> is a fossil from <subject> .",
+        "<subject> have fossils of <object> .",
+        "The <object> fossil was found in <subject> ."
+    ],
+    "foundationPlace": [
+        "<subject> was founded in <object> .",
+        "<subject> was founded in <object>"
+    ],
+    "foundedBy": [
+        "<object> was the founder of <subject> .",
+        "<subject> was founded by <object> ."
+    ],
+    "founder": [
+        "The founder of <subject> is <object> .",
+        "<object> founded <subject> .",
+        "<object> is the founder of <subject> .",
+        "<object> was the founder of <subject> .",
+        "The founder of <subject> was <object> .",
+        "<subject> was founded by <object> ."
+    ],
+    "foundingDate": [
+        "<subject> was founded <object> .",
+        "<subject> founding date was on <object> .",
+        "<subject> was founded on <object> .",
+        "<subject> was started on <object> ."
+    ],
+    "frequency": [
+        "<subject> is published <object> ."
+    ],
+    "fullName": [
+        "<subject> is `` <object> '' .",
+        "<subject> full name is <object> .",
+        "<subject> 's full name is <object> ."
+    ],
+    "fullname": [
+        "<subject> full name is <object> .",
+        "<subject> has the full name `` <object> '' .",
+        "The full name of <subject> is <object> .",
+        "The fullname of <subject> is <object> .",
+        "<object> is abbreviated to <subject> .",
+        "<subject> fullname is <object>",
+        "<subject> fullname is <object> .",
+        "<subject> stands for `` <object> '' .",
+        "<object> is the non-abbreviated name of <subject> .",
+        "<object> is the full name of <subject> .",
+        "The full name of <subject> is `` <object> '' .",
+        "<subject> full name is `` <object> '' .",
+        "The fullname of <subject> is <object>",
+        "<subject> has the full name of `` <object> '' .",
+        "<object> is the fullname of <subject> ."
+    ],
+    "genre": [
+        "<subject> is in the genre of <object> .",
+        "<subject> is <object> ."
+    ],
+    "genus": [
+        "<subject> is of the <object> genus .",
+        "<subject> is a member of the genus <object> .",
+        "<subject> belongs to the genus <object> .",
+        "<subject> is part of <object> .",
+        "<subject> is from <object> .",
+        "<subject> is from the genus <object> ."
+    ],
+    "governingBody": [
+        "The governing body of <subject> is <object> .",
+        "<object> is the governing body of <subject> .",
+        "<subject> governing body is <object> ."
+    ],
+    "governmentType": [
+        "<object> governs <subject> .",
+        "The type of government of <subject> is <object> .",
+        "The city of <subject> is governed by <object> .",
+        "<subject> is governed by <object> ."
+    ],
+    "ground": [
+        "The ground of <subject> is located in <object> .",
+        "<object> is the home to <subject> .",
+        "<subject> play in <object> .",
+        "<subject> are at <object> .",
+        "<subject> home ground is <object> .",
+        "<subject> play their home matches at <object> .",
+        "<subject> is playing in <subject> ground at <object> .",
+        "<subject> ground is located in <object> .",
+        "<subject> play at <object> .",
+        "<subject> is <object> .",
+        "The home ground of <subject> is <object> .",
+        "<object> is the ground of <subject> .",
+        "The ground for <subject> is <object> .",
+        "<subject> have a ground in <object> .",
+        "<subject> are based at <object> .",
+        "<subject> ground is in <object> .",
+        "<subject> is based in <object> .",
+        "<object> is the name of the ground of <subject> .",
+        "The ground of <subject> is called <object> .",
+        "<subject> ground is <object> .",
+        "<subject> has the ground <object> .",
+        "<object> is the location of the ground of <subject> .",
+        "<object> is the grounds for <subject> .",
+        "The ground of <subject> can be found in <object> .",
+        "<object> is the home ground of <subject> ."
+    ],
+    "has to its north": [
+        "<subject> has <object> to <subject> north .",
+        "<object> is located in the north of <subject> .",
+        "To the north of <subject> is <object> .",
+        "<object> is to the north of <subject> .",
+        "<object> is north of <subject> ."
+    ],
+    "has to its northeast": [
+        "To the northeast of <subject> is <object> .",
+        "<subject> has to <subject> northeast <object> .",
+        "<object> is the area to the northeast of <subject> .",
+        "<object> is to the northeast of <subject> .",
+        "<subject> neighbors <object> to <subject> northeast ."
+    ],
+    "has to its southwest": [
+        "<object> is to the southwest of <subject> .",
+        "<object> is southwest of <subject> .",
+        "<subject> has <object> to <subject> southwest .",
+        "<object> is found to southwest of <subject> ."
+    ],
+    "has to its west": [
+        "<object> is found to the west of <subject> .",
+        "To the west of <subject> , is <object> .",
+        "<subject> has to <subject> west <object> .",
+        "<subject> is East of <object> .",
+        "<object> is west of <subject> .",
+        "To the west <subject> borders on <object> .",
+        "The west of <subject> is <object> ."
+    ],
+    "headquarter": [
+        "<subject> is at <object> .",
+        "The headquarters of <subject> are at <object> .",
+        "The headquarters of <subject> is in <object> .",
+        "<subject> headquarter is <object> .",
+        "<subject> is headquartered at <object> .",
+        "<subject> has <subject> headquarters in <object> .",
+        "The headquarters of <subject> are in <object> .",
+        "The headquarters of <subject> are located in <object> .",
+        "<object> is the base of <subject> .",
+        "<subject> is headquartered in <object>",
+        "<subject> is headquartered in <object> .",
+        "<subject> headquarters on <object> .",
+        "The <subject> Headquarters is <object> .",
+        "<object> is where <subject> is located ."
+    ],
+    "headquarters": [
+        "The headquarters of <subject> is in <object> .",
+        "<subject> headquarter is in <object> ."
+    ],
+    "height": [
+        "The height of <subject> is <object> .",
+        "<subject> is <object> high .",
+        "<subject> is <object> in height .",
+        "<subject> is <object> .",
+        "<subject> has a height of <object> ."
+    ],
+    "higher": [
+        "<subject> ranks higher than <object> .",
+        "<subject> is higher than <object> ."
+    ],
+    "hometown": [
+        "<object> is the home town of <subject> .",
+        "The hometown of <subject> is <object> ."
+    ],
+    "hubAirport": [
+        "The hub Airport of <subject> is <object> .",
+        "The hub airport for <subject> is <object> .",
+        "<object> is the hub for <subject> .",
+        "<subject> utilizes <object> as <subject> hub ."
+    ],
+    "impactFactor": [
+        "The impact factor of <subject> is <object> .",
+        "<subject> has the impact <object> ."
+    ],
+    "inaugurationDate": [
+        "The inauguration date of <subject> was <object> .",
+        "The inauguration date of <subject> is <object> .",
+        "<subject> was inaugurated on <object> .",
+        "The inauguration date for <subject> is <object> .",
+        "The inauguration of <subject> was at <object> .",
+        "<subject> was inaugurated on `` <object> '' .",
+        "<subject> was in augurated on <object> ."
+    ],
+    "influencedBy": [
+        "<subject> was influenced by <object> .",
+        "<subject> is influenced by <object> ."
+    ],
+    "ingredient": [
+        "<object> is one ingredient in <subject> .",
+        "<object> is an ingredient in <subject> .",
+        "<object> is one of the ingredients in <subject> .",
+        "An ingredient in <subject> is <object> .",
+        "One of the ingredients in <subject> is <object> .",
+        "<object> is a key ingredient in <subject> .",
+        "<object> is included in the list of ingredients needed to make <subject> .",
+        "<object> are used in the preparation of <subject> .",
+        "<object> is an ingredient used in the preparation of <subject> .",
+        "<object> is an ingredient of <subject> .",
+        "one of the ingredients of <subject> is <object> .",
+        "<object> in an ingredient in <subject> .",
+        "<subject> includes the ingredient <object> .",
+        "<subject> has almond as <object> of <subject> ingredients .",
+        "One of the ingredients of <subject> is <object> .",
+        "<object> is one of the ingredients of <subject> .",
+        "<object> are an ingredient in <subject> .",
+        "<object> are ingredients in <subject> .",
+        "An ingredient of <subject> is <object> .",
+        "<object> can be an ingredient in <subject> .",
+        "<object> is included in <subject> .",
+        "<object> is a main ingredient of <subject> .",
+        "One ingredient of <subject> is <object> .",
+        "<object> is an ingredient used in <subject> .",
+        "<object> can be added to <subject> .",
+        "<object> is one of the ingredients used to make <subject> .",
+        "<object> are found in <subject> .",
+        "<object> is used in <subject> , .",
+        "<subject> are made with <object> .",
+        "<object> are in <subject> .",
+        "<subject> have <object> in <subject> .",
+        "<subject> includes <object> .",
+        "<subject> requires <object> as one of <subject> ingredients .",
+        "<subject> has <object> in <subject> .",
+        "<subject> has <object> as one of <subject> ingredients .",
+        "<object> is and ingredient in <subject> .",
+        "<subject> uses <object> .",
+        "<subject> contains <object> .",
+        "<object> is contained in <subject> ."
+    ],
+    "isPartOf": [
+        "<subject> falls under <object> .",
+        "<subject> , is part of <object> .",
+        "<subject> is part of <object> .",
+        "<subject> is situated in <object> .",
+        "<object> is a part of <subject> .",
+        "<subject> which is part of <object> .",
+        "Most of <subject> is part of <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is a part of <object> .",
+        "The city of <subject> is located within <object> .",
+        "<subject> which is a part of <object> .",
+        "<subject> , is a part of <object> .",
+        "<subject> was part of <object> .",
+        "<subject> is in <object> .",
+        "<subject> was situated in <object> .",
+        "<object> is part of <subject> .",
+        "<subject> forms part of <object> .",
+        "<object> is the location of <subject> .",
+        "<subject> is located within <object> .",
+        "<subject> is a city in <object> .",
+        "<subject> is a township in <object> .",
+        "<subject> in <object> .",
+        "<subject> is part of <object>",
+        "<subject> , is in <object> .",
+        "<subject> is located within <object> , .",
+        "<object> is situated in <subject> .",
+        "<subject> was a part of <object> .",
+        "<subject> is part Of <object> ."
+    ],
+    "jurisdiction": [
+        "<object> is the jurisdiction of <subject> .",
+        "The jurisdiction of <subject> is <object> .",
+        "<subject> has jurisdiction of <object> .",
+        "<subject> jurisdiction is <object> .",
+        "<subject> has <subject> jurisdiction in <object> ."
+    ],
+    "keyPerson": [
+        "<object> is a key person with <subject> .",
+        "<object> was a key person at <subject> .",
+        "A key person at <subject> is <object> .",
+        "<object> is the key person for <subject> .",
+        "The key person for <subject> is <object> ."
+    ],
+    "language": [
+        "One of the languages of <subject> is <object> .",
+        "One of the languages used in <subject> is <object> .",
+        "<object> is a language found in <subject> .",
+        "In <subject> the language spoken is <object> .",
+        "<object> is the official language of <subject> .",
+        "In <subject> they speak <object> .",
+        "<object> are spoken in <subject> .",
+        "<object> , is one of the languages spoken in <subject> .",
+        "<object> is the national language of <subject> .",
+        "<object> is the language of <subject> .",
+        "One of languages spoken in <subject> is <object> .",
+        "<object> is the spoken language in <subject> .",
+        "Some parts of <subject> speak <object> .",
+        "One of the languages spoken in <subject> is <object> .",
+        "<object> is spoken in <subject> .",
+        "<object> is one of languages spoken in <subject> .",
+        "<object> is the language in <subject> .",
+        "<object> is one of the official language in <subject> .",
+        "The spoken language in <subject> is <object> .",
+        "<object> can be heard in <subject> .",
+        "<object> is used in <subject> .",
+        "<object> is the language used in <subject> .",
+        "<subject> language is <object> .",
+        "<subject> is in <object> .",
+        "One of the languages in <subject> is <object> .",
+        "<object> is one of the languages spoken in <subject> .",
+        "In <subject> , the language spoken is <object> .",
+        "<object> is one of the languages that is spoken in <subject> .",
+        "The language spoken in <subject> is <object> .",
+        "The language in <subject> is <object> .",
+        "In <subject> one of the languages spoken is <object> .",
+        "The language used in <subject> is <object> .",
+        "<object> is a language of <subject> .",
+        "<object> is one of the languages being spoken in <subject> .",
+        "<object> is a language in <subject> .",
+        "<object> is one language spoken in <subject> .",
+        "<subject> is written in <object> .",
+        "<subject> originally published in <object> .",
+        "<object> is one of the languages of <subject> .",
+        "<subject> has <object> .",
+        "<object> is the language spoken in <subject> .",
+        "<object> is a language spoken in <subject> .",
+        "<subject> uses <object> .",
+        "<subject> was written in <object> .",
+        "In <subject> , the spoken language is <object> .",
+        "The main language spoken on <subject> is <object> .",
+        "The language of <subject> is <object> ."
+    ],
+    "languages": [
+        "<object> is a language spoken in <subject> .",
+        "One of the languages spoken in <subject> is <object> .",
+        "<object> is spoken in <subject> ."
+    ],
+    "largestCity": [
+        "<object> is <subject> largest city .",
+        "<object> is the largest city , in <subject> .",
+        "<object> is the largest city of <subject> .",
+        "The largest city of <subject> is <object> .",
+        "<object> is the largest city in <subject> .",
+        "<subject> largest City is <object> .",
+        "The largest city in <subject> is <object> .",
+        "The biggest city in <subject> is <object> .",
+        "<subject> is the largest city in <object> .",
+        "The largest city in <subject> , is <object> ."
+    ],
+    "lastAired": [
+        "<subject> last aired on <object> ."
+    ],
+    "latinName": [
+        "The Latin name of <subject> is `` <object> '' .",
+        "The latin name of <subject> is `` <object> '' .",
+        "<subject> has the latin name <object> .",
+        "The Latin name of <subject> is <object> .",
+        "The latin name for <subject> is <object> ."
+    ],
+    "leader": [
+        "<object> , is one of the leaders , in <subject> .",
+        "<object> is a leader of <subject> .",
+        "Leader of <subject> is <object> .",
+        "The Leader Of <subject> is <object> .",
+        "<object> is the leader of <subject> .",
+        "<object> is <subject> 's leader .",
+        "The leader of <subject> , is <object> .",
+        "<subject> is lead by <object> .",
+        "<object> is the leader in <subject> .",
+        "<object> was a representative of <subject> .",
+        "<object> heads <subject> .",
+        "<subject> leader is <object> .",
+        "<object> is one of <subject> leaders .",
+        "<subject> council is <object> .",
+        "<object> is the Senate leader of <subject> .",
+        "The leader , of <subject> , is <object> .",
+        "<object> leads <subject> .",
+        "<subject> is led by <object> .",
+        "<object> is the <subject> leader .",
+        "<object> is <subject> .",
+        "The leader in <subject> is <object> .",
+        "<object> is a <subject> leader .",
+        "The leader of <subject> is <object> .",
+        "<object> is a leader in <subject> ."
+    ],
+    "leaderName": [
+        "the name of the leader of <subject> is <object> .",
+        "<object> is a leader of <subject> .",
+        "<object> are the leaders of <subject> .",
+        "<object> is the prime minister of <subject> .",
+        "<object> is the leader of <subject> .",
+        "<object> was <subject> leader .",
+        "The name of the leader in <subject> is <object> .",
+        "<object> is the Mayor of <subject> .",
+        "The leader of <subject> are <object> .",
+        "<subject> Chief Justice is <object> .",
+        "The Leader of <subject> is <object> .",
+        "One of <subject> leaders is <object> .",
+        "One of the leaders of <subject> is called <object> .",
+        "The <subject> leader 's name is <object> .",
+        "The leader of <subject> is called <object> .",
+        "The leader 's name of <subject> is <object> .",
+        "The <subject> leader was called <object> .",
+        "<object> is <subject> leader .",
+        "The <subject> leader is in <object> .",
+        "<object> is the name of the Leader of <subject> .",
+        "The leader name of <subject> is <object> .",
+        "<object> is the head of <subject> .",
+        "<object> is the name of the leader of <subject> .",
+        "<object> is the leader in <subject> .",
+        "<subject> is lead by <object> .",
+        "<object> was the leader of <subject> .",
+        "<subject> leader 's name is <object> .",
+        "<object> is one of the leaders of <subject> .",
+        "<subject> leader is <object> .",
+        "<object> served as <subject> vice president .",
+        "The leaders of <subject> are <object> .",
+        "The leader of <subject> of Valencia is <object> .",
+        "<object> is a political leader in <subject> .",
+        "<subject> has a leader called <object> .",
+        "the leader in <subject> is <object> .",
+        "<object> is the president of <subject> .",
+        "The Queen of <subject> is <object> .",
+        "The leader of <subject> was <object> .",
+        "The Emperor of <subject> is <object> .",
+        "<object> is the name of the leader in <subject> .",
+        "<object> is a key leader in <subject> .",
+        "<subject> 's leader is <object> .",
+        "<object> is a leader from <subject> .",
+        "The leader if <subject> is called <object> .",
+        "<subject> is led by <object> .",
+        "<object> leads <subject> .",
+        "<object> is the head of state in <subject> .",
+        "<object> are leaders of <subject> .",
+        "The leader in <subject> is <object> .",
+        "The name of <subject> leader is <object> .",
+        "<object> is a <subject> leader .",
+        "The leader of <subject> is <object> .",
+        "<subject> leader is called <object> .",
+        "<object> is a leader in <subject> .",
+        "<subject> leader name is <object> .",
+        "<object> is a political leader in <subject>",
+        "<object> is the name of <subject> leader ."
+    ],
+    "leaderParty": [
+        "<object> is the lead party of <subject> .",
+        "<object> is the leading party of <subject> .",
+        "<object> are the leading party in <subject> .",
+        "The leader party at <subject> is <object> .",
+        "The leader party in <subject> is <object> ."
+    ],
+    "leaderTitle": [
+        "<object> is the leader title in <subject> .",
+        "<object> is the title of the leader of <subject> .",
+        "<object> of <subject> is the country 's leader .",
+        "<object> is the leader of <subject> .",
+        "<object> , is the title for the leader of <subject> .",
+        "<object> is the title of the leader in <subject> .",
+        "<object> is the official title of <subject> .",
+        "<subject> leader is call <object> .",
+        "The leader of <subject> has a title of <object> .",
+        "The leader of <subject> is titled <object> .",
+        "<subject> is lead via <object> .",
+        "The title of the leader of <subject> is `` <object> '' .",
+        "The leader of <subject> is called <object> .",
+        "The leader of <subject> has the title of <object> .",
+        "<subject> is lead by <object> .",
+        "The title of the leader of <subject> is <object> .",
+        "<object> is the leader in <subject> .",
+        "The municipal leader of <subject> is known as <object> .",
+        "The leader for <subject> is <object> .",
+        "The title of the leader in <subject> is <object> .",
+        "The leader title of <subject> , is <object> .",
+        "<subject> leader is <object> .",
+        "<object> is the leader of <subject>",
+        "The leader of the government in <subject> is <object> .",
+        "In <subject> , the leader is called , <object> .",
+        "<object> leads <subject> .",
+        "<subject> is led by <object> .",
+        "The municipal official titled <object> leads <subject> .",
+        "The leader of <subject> is known as <object> .",
+        "The leader 's title in <subject> is <object> .",
+        "The leader in <subject> is <object> .",
+        "<subject> leader is known as <object> .",
+        "The leader of <subject> has <object> .",
+        "The leader of <subject> is <object> .",
+        "The leader title in <subject> is <object> .",
+        "<object> is a leader in <subject> .",
+        "<object> helps to lead <subject> ."
+    ],
+    "league": [
+        "The league that <subject> play in is <object>",
+        "<subject> plays in <object>",
+        "<subject> in the <object> league .",
+        "<subject> are in the <object> league .",
+        "<subject> played in the <object> league .",
+        "<subject> is in the league , <object> .",
+        "<subject> is a member of <object> .",
+        "<subject> is in the league , <object>",
+        "<subject> is in the <object> league .",
+        "<subject> play in <object> .",
+        "<subject> play in <object>",
+        "<subject> is part of <object> .",
+        "<subject> compete in <object> .",
+        "<subject> play in the <object> league .",
+        "<subject> is in <object> ."
+    ],
+    "legislature": [
+        "<object> is the source of legislature in <subject> .",
+        "<subject> has legislature of <object> .",
+        "<subject> legislature is formed in <object> .",
+        "<object> dictates the legislature of <subject> .",
+        "<object> is the legislative branch of government in <subject> .",
+        "<object> legislates in <subject> .",
+        "the legislature in <subject> is <object> .",
+        "The <subject> legislature is known as <object> .",
+        "<subject> legislature is known as <object> ."
+    ],
+    "literaryGenre": [
+        "<subject> is considered <object> .",
+        "The literary genre of <subject> is <object> ."
+    ],
+    "location": [
+        "<subject> is a location in <object> .",
+        "<subject> are located in <object> .",
+        "The location of <subject> is <object> .",
+        "<subject> is situated in <object> .",
+        "<subject> is located on <object> .",
+        "<subject> is located in <object> .",
+        "<subject> location is <object> .",
+        "<subject> is in <object>",
+        "<subject> is locatedd in <object> .",
+        "<subject> is in <object> .",
+        "<subject> is found in <object> .",
+        "<object> is the location of <subject> .",
+        "<subject> is located within <object> .",
+        "<subject> can be found in <object> .",
+        "The <subject> club is located in <object> .",
+        "<subject> is based in <object> .",
+        "<subject> are located on <object> .",
+        "<subject> is located at <object> .",
+        "<subject> location is in <object> .",
+        "<object> is in <subject> .",
+        "<subject> is located in <object>"
+    ],
+    "locationCity": [
+        "The <subject> headquarters is called <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is in the city of <object> .",
+        "<object> is the home of <subject> .",
+        "The <subject> location city is <object> .",
+        "The location of <subject> is <object> .",
+        "<subject> is located in the city of <object> ."
+    ],
+    "locationIdentifier": [
+        "The location Identifier of <subject> is <object> .",
+        "The loaction identifier of <subject> is <object> .",
+        "<object> is the location identifier of <subject> .",
+        "<subject> is located in <object> .",
+        "<subject> location id is `` <object> '' .",
+        "The location identifier of <subject> is <object> .",
+        "<subject> location identifier is <object> .",
+        "<subject> location idenitifier is <object> .",
+        "The <subject> location identifier is <object> .",
+        "The location identifier for <subject> is <object> .",
+        "<object> is the I.D. of <subject> ."
+    ],
+    "mainIngredients": [
+        "<object> is the main ingredient of <subject> .",
+        "One of the main ingredients in <subject> is <object> .",
+        "<subject> main ingredients are <object> .",
+        "The main ingredients of <subject> are <object> .",
+        "the main ingredients in <subject> are <object> .",
+        "<object> are the main ingredients of <subject> .",
+        "<object> is the main ingredient in <subject> .",
+        "<subject> is a dish of <object> .",
+        "The main ingredient of <subject> is <object> .",
+        "<object> are the main ingredients in <subject> .",
+        "One of the main ingredients of <subject> is <object> .",
+        "The main ingredients in <subject> are <object> .",
+        "The main ingredient in <subject> is <object> .",
+        "The main ingredients of <subject> are : <object> .",
+        "<object> is a main ingredient of <subject> .",
+        "The main ingredients of <subject> consist of <object> .",
+        "<subject> has <object> as main ingredients .",
+        "A main ingredient of <subject> is <object> .",
+        "<object> are main ingredients in <subject> .",
+        "<object> is a main ingredient in <subject> .",
+        "Some main ingredients in <subject> are <object> .",
+        "The main ingredients for <subject> are : <object> ."
+    ],
+    "manager": [
+        "<object> manages <subject> .",
+        "The manager of <subject> is <object> .",
+        "<object> has been manager of <subject> .",
+        "<subject> are managed by <object> .",
+        "<object> is the manager of <subject> .",
+        "<object> was the manager of <subject> .",
+        "<subject> manager is <object> .",
+        "<object> has been the manager of <subject> .",
+        "the manager of <subject> is <object> .",
+        "<subject> have had <object> as <subject> manager .",
+        "<subject> is managed by <object> ."
+    ],
+    "material": [
+        "<subject> is made of <object> .",
+        "<subject> is made from <object> .",
+        "<subject> is made with <object> ."
+    ],
+    "mayor": [
+        "The mayor of <subject> is <object> .",
+        "<object> is the mayor of <subject> ."
+    ],
+    "mediaType": [
+        "<subject> can be found in <object> , .",
+        "<subject> is of <object> .",
+        "<subject> was published in <object> .",
+        "<subject> is published in <object> .",
+        "<subject> was made in `` <object> '' .",
+        "The book titled <subject> is <object> .",
+        "<subject> comes in <object> .",
+        "<subject> is available as <object> .",
+        "<subject> can be found in <object> .",
+        "1634 : <subject> is available in <object> .",
+        "<subject> is available in <object> .",
+        "<subject> is produced in <object> .",
+        "<subject> is <object> .",
+        "<subject> is in <object> .",
+        "<subject> was put in <object> .",
+        "<subject> can be found as <object> .",
+        "<subject> was produced in <object> ."
+    ],
+    "motto": [
+        "The motto of <subject> is `` <object> '' .",
+        "<subject> motto is <object> ."
+    ],
+    "municipality": [
+        "The municipality for <subject> is <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is in the municipality of <object> .",
+        "<subject> is placed in the municipality of <object> .",
+        "<subject> is in <object> ."
+    ],
+    "nationality": [
+        "<subject> was <object> .",
+        "<subject> nationality is <object> .",
+        "<subject> was an <object> national .",
+        "<subject> is a national of <object> so <subject> is considered <object> .",
+        "<subject> 's nationality is <object> .",
+        "<subject> was from <object> .",
+        "<subject> had a nationality that was of <object> .",
+        "<object> was the nationality of <subject> .",
+        "<subject> is <object> national .",
+        "The nationality of <subject> is <object> .",
+        "<subject> is a <object> national .",
+        "<subject> is <object> .",
+        "<subject> is from <object> .",
+        "<subject> has a nationality that is of <object> ."
+    ],
+    "nativeName": [
+        "The native name of <subject> is <object> .",
+        "<object> is the native name of <subject> ."
+    ],
+    "nearestCity": [
+        "The city nearest to <subject> is <object> .",
+        "The nearest city to <subject> is <object> ."
+    ],
+    "nickname": [
+        "<subject> nickname is <object> .",
+        "<subject> has the nickname <object> .",
+        "<object> is the nickname of <subject> .",
+        "<subject> have the nickname <object> .",
+        "<subject> is nicknamed <object> .",
+        "The nickname of <subject> is <object> .",
+        "The nickname of <subject> is `` <object> '' .",
+        "<object> is the nickname for <subject> .",
+        "<subject> is known as <object> ."
+    ],
+    "notableWork": [
+        "<object> is a notable work by <subject> .",
+        "A notable work of <subject> is <object> .",
+        "<subject> notableWork was <object> .",
+        "One of <subject> notable works is <object> ."
+    ],
+    "numberOfMembers": [
+        "<subject> club has <object> members .",
+        "The number of members of <subject> is <object> .",
+        "<subject> have <object> members .",
+        "<subject> has <object> members .",
+        "There are <object> members of <subject> ."
+    ],
+    "numberOfPages": [
+        "<subject> is a book that has <object> pages .",
+        "<object> is the number of pages <subject> has .",
+        "<subject> contains <object> pages .",
+        "<subject> is <object> pages long .",
+        "<subject> has <object> pages .",
+        "<subject> has a total of <object> pages .",
+        "There are <object> pages in `` <subject> '' .",
+        "<subject> has <object> pages in <subject> ."
+    ],
+    "numberOfPostgraduateStudents": [
+        "There are about <object> post graduate students at <subject> .",
+        "There are around <object> postgraduate students at <subject> .",
+        "The number of post graduate students at <subject> is about <object> .",
+        "<subject> has <object> postgraduate students .",
+        "<object> students are enrolled in a post-graduate program at <subject> ."
+    ],
+    "numberOfStudents": [
+        "<object> students attend <subject> .",
+        "There are <object> students at <subject> .",
+        "There are <object> students attending <subject> .",
+        "<subject> has <object> students .",
+        "<subject> has <object> students enrolled ."
+    ],
+    "numberOfUndergraduateStudents": [
+        "There are around <object> undergraduate students at <subject> .",
+        "<subject> has <object> undergraduate students .",
+        "<subject> has <object> .",
+        "The number of undergraduates attending <subject> is roughly <object> students ."
+    ],
+    "occupation": [
+        "<subject> was <object> .",
+        "<subject> performs as <object> .",
+        "<subject> 's occupation was <object> .",
+        "<subject> is <object> .",
+        "<subject> served as <object> .",
+        "<subject> performed as <object> ."
+    ],
+    "officialLanguage": [
+        "The official language in <subject> is <object> .",
+        "<subject> official language is <object> .",
+        "The official language of <subject> is <object> .",
+        "<object> is the official language of <subject> .",
+        "<object> is an official language of <subject> ."
+    ],
+    "officialSchoolColour": [
+        "<subject> official school colours are <object> .",
+        "<object> are the colours adopted by <subject> .",
+        "<subject> official colors are <object> .",
+        "The official school colours of <subject> are <object> .",
+        "<subject> official school colors are <object> .",
+        "<object> are the colours of <subject> ."
+    ],
+    "operatingOrganisation": [
+        "<subject> is operated by <object> .",
+        "The operating organization for <subject> is <object> .",
+        "The operating organization for <subject> is in <object> .",
+        "The operators of <subject> are in <object> .",
+        "<object> governs <subject> .",
+        "<subject> operating organization is <object> .",
+        "The operating organization for <subject> is called <object> .",
+        "<object> operates <subject> .",
+        "<subject> operation organization is <object> .",
+        "<object> is the operating organisation for <subject> .",
+        "<object> is the operating organisation of <subject> , .",
+        "<object> is the operation organisation of <subject> .",
+        "<subject> is run by the operation organisation <object> .",
+        "<object> is the operating organisation of <subject> ."
+    ],
+    "operator": [
+        "<subject> was operated by <object> .",
+        "The operator of <subject> was <object> .",
+        "<subject> is operated by <object> .",
+        "The <subject> mission was operated by <object> .",
+        "<object> operate <subject> .",
+        "The <subject> operator is <object> .",
+        "<object> operated <subject> .",
+        "<subject> was organized by <object> ."
+    ],
+    "order": [
+        "<subject> are from the order <object> .",
+        "<subject> is one of the members of the <object> order .",
+        "<subject> is a member of the order of <object> .",
+        "<subject> is of the <object> order .",
+        "<subject> is part of the order of <object> .",
+        "<subject> is a member of the <object> order .",
+        "<subject> comes from <object> .",
+        "<subject> are part of the order of <object> .",
+        "<subject> is a fruit of <object> .",
+        "<subject> are classified in the order <object> .",
+        "<subject> is one of the members of the order <object> .",
+        "<subject> is the order of <object> .",
+        "<subject> is included in the order of <object> .",
+        "<subject> is of the order <object> .",
+        "<subject> belongs to the <object> order of plants .",
+        "<subject> belongs to the order of <object> .",
+        "<subject> is under the order of <object> ."
+    ],
+    "outlookRanking": [
+        "<subject> has an outlook ranking of <object> .",
+        "<subject> 's outlook ranking is <object> .",
+        "The outlook ranking for <subject> is <object> ."
+    ],
+    "owner": [
+        "<object> is the owner of <subject> .",
+        "The owner of <subject> is <object> .",
+        "<object> own <subject> .",
+        "<subject> is owned by <object>",
+        "<subject> is owned by <object> .",
+        "<object> looks after <subject> .",
+        "<subject> owner is <object> .",
+        "<object> owns <subject> ."
+    ],
+    "owningOrganisation": [
+        "<subject> is owned by <object> .",
+        "<object> owns <subject> .",
+        "<object> has responsibility for <subject> .",
+        "<subject> has been provided by <object> ."
+    ],
+    "parentCompany": [
+        "The parent company of <subject> is <object> .",
+        "<object> are the parent company of <subject> .",
+        "<object> is the parent company of <subject> .",
+        "<object> owns <subject> ."
+    ],
+    "part": [
+        "<object> is part of <subject> .",
+        "<subject> is in <object> .",
+        "<subject> is located in <object> ."
+    ],
+    "placeOfBirth": [
+        "<subject> was born in <object> ."
+    ],
+    "placeOfDeath": [
+        "The architect <subject> died in <object> .",
+        "<subject> died in <object> ."
+    ],
+    "populationDensity": [
+        "There are <object> in <subject> .",
+        "The population density , of <subject> , is <object> .",
+        "The total population density of <subject> is <object> .",
+        "The population density of <subject> is <object> .",
+        "The population density in <subject> is <object> .",
+        "There are <object> in <subject>",
+        "The population density of <subject> , is <object> .",
+        "<subject> has <object> .",
+        "<object> inhabit <subject> .",
+        "<subject> has a population of <object> .",
+        "<subject> , has a population density of <object> .",
+        "<subject> has a population density of <object> .",
+        "The population density in <subject> , is <object> .",
+        "Population density in <subject> is <object> .",
+        "<subject> , where the population density is <object> .",
+        "The population density for <subject> is <object> .",
+        "<subject> , has a population of <object> ."
+    ],
+    "populationTotal": [
+        "<subject> has <object> people inhabiting <subject> .",
+        "<subject> has a population of <object> .",
+        "The total population of <subject> is <object> .",
+        "The population of <subject> is <object> ."
+    ],
+    "postalCode": [
+        "<subject> has postal codes <object> .",
+        "<object> are postal codes for <subject> ."
+    ],
+    "precededBy": [
+        "<subject> was preceded by <object> .",
+        "<object> was written prior to `` <subject> '' .",
+        "<subject> is the sequel to <object> .",
+        "<object> is the sequel to <subject> .",
+        "<subject> is preceded by <object> .",
+        "<subject> was written after <object> .",
+        "<object> preceded <subject> .",
+        "<subject> was preceded By <object> ."
+    ],
+    "president": [
+        "<object> was appointed as the president of <subject> .",
+        "<object> is president of <subject> .",
+        "The president of <subject> is <object> .",
+        "<object> is the President of <subject> .",
+        "<object> is the appointed president of <subject> ."
+    ],
+    "product": [
+        "<subject> produces <object> .",
+        "One of the products of <subject> is <object> .",
+        "<object> radio is one of the products of <subject> ."
+    ],
+    "publisher": [
+        "<subject> publisher of <object> .",
+        "<object> publishes <subject> .",
+        "<object> is the publisher of <subject> .",
+        "<subject> is publshed by <object> .",
+        "<subject> is published by <object> .",
+        "<object> publish <subject> .",
+        "<subject> publisher is <object> .",
+        "<subject> was published by <object> .",
+        "<subject> are the publishers of <object> ."
+    ],
+    "rector": [
+        "<object> is rector of <subject> .",
+        "The rector of <subject> is <object> ."
+    ],
+    "region": [
+        "<subject> can be found <object> .",
+        "<subject> is a dish that comes from the <object> region .",
+        "<subject> is from the <object> region .",
+        "<subject> is found in the <object> region .",
+        "<subject> is located in the region of <object> .",
+        "<subject> is found in the region of <object> .",
+        "<subject> are found in the region of <object> .",
+        "<subject> is a popular dish in <object> .",
+        "<subject> comes from either <object> .",
+        "<subject> comes from the region of <object> .",
+        "<subject> comes from the <object> region .",
+        "<subject> come from the <object> region .",
+        "<subject> originates from <object> .",
+        "<subject> is popular all over <object> .",
+        "<subject> is located in <object> .",
+        "<subject> is food found in <object> .",
+        "<subject> is a dish that is popular <object> .",
+        "<subject> is popular in the <object> area .",
+        "<subject> is a sauce from <object> .",
+        "<subject> is a dish of <object> .",
+        "<subject> is a traditional dish <object> .",
+        "<subject> is a traditional dish from <object> .",
+        "<subject> is from <object> .",
+        "<subject> is popular in <object> .",
+        "<subject> is available <object> .",
+        "<subject> is found in <object> .",
+        "<subject> is a dish from the <object> region .",
+        "<subject> is made <object> .",
+        "<subject> is popular <object> .",
+        "<subject> is from the <object> regions .",
+        "<subject> is a dish from <object> .",
+        "<subject> can be found in <object> .",
+        "<subject> is a food found in <object> .",
+        "<subject> comes from <object> .",
+        "<subject> originates from the region of <object> .",
+        "<object> are the regions where <subject> is found .",
+        "<object> is the regions where <subject> comes from .",
+        "<subject> originated from the region of <object> .",
+        "<subject> hails from <object> ."
+    ],
+    "regionServed": [
+        "<subject> serves the <object> region .",
+        "<subject> is based in <object> .",
+        "<subject> serves <object> ."
+    ],
+    "related": [
+        "<subject> is related to <object> .",
+        "<subject> is a snack that is similar to <object> .",
+        "<subject> and <object> are related ."
+    ],
+    "religion": [
+        "the religion of <subject> is <object> .",
+        "The established religion in <subject> is <object> .",
+        "<subject> religion is led by <object> .",
+        "<object> is the religion of <subject> .",
+        "In <subject> the main religion is <object> .",
+        "The official religion of <subject> is <object> ."
+    ],
+    "representative": [
+        "<object> served as a representative of <subject> .",
+        "<object> is a representative of <subject> .",
+        "The <subject> representative is <object> .",
+        "<object> represented <subject> ."
+    ],
+    "residence": [
+        "<subject> resides in <object> .",
+        "<object> is the residence of <subject> .",
+        "<subject> lives in <object>"
+    ],
+    "river": [
+        "<object> is <subject> most well known river .",
+        "<object> is a river in <subject> ."
+    ],
+    "runwayLength": [
+        "The runway at <subject> is <object> .",
+        "The average runway length at <subject> is <object> .",
+        "The length of the runway at <subject> is <object> metres .",
+        "The runway length at <subject> is <object> meters .",
+        "<object> is the runway length at <subject> .",
+        "The runway length of <subject> is <object> metres .",
+        "<subject> is <object> long .",
+        "<subject> is <object> .",
+        "The <subject> runway has a length of <object> .",
+        "<subject> runway has a length of <object> .",
+        "The runway at <subject> is <object> in length .",
+        "<subject> runway length is <object> .",
+        "The runway length at <subject> is <object> .",
+        "<object> is the length of the runway at <subject> .",
+        "<object> is the length of the runway of <subject> .",
+        "The runway at <subject> is <object> long .",
+        "<subject> runway is <object> long .",
+        "<subject> has a runway length of <object> .",
+        "The length of the runway at <subject> is <object> .",
+        "The runway length of <subject> is <object> .",
+        "<subject> 's runway length is <object> ."
+    ],
+    "runwayName": [
+        "The runway at <subject> is <object> .",
+        "<object> is the runway name at <subject> .",
+        "The name of <subject> runway is `` <object> '' .",
+        "<subject> has the runway name <object> .",
+        "The runway at <subject> is named <object> .",
+        "The runway name at <subject> is `` <object> '' .",
+        "The name of the runway at <subject> is <object> .",
+        "<subject> is <object> .",
+        "The runway name at <subject> is <object> .",
+        "`` <object> '' is a runway name at <subject> .",
+        "<object> are the names for the runway at <subject> .",
+        "<object> is a runway name at <subject> .",
+        "<object> is the runway name at <subject> , .",
+        "The runway name of <subject> is <object> .",
+        "<subject> has a runway named <object> .",
+        "<object> is the runway name of <subject> .",
+        "<object> is the name of the runway of <subject> .",
+        "<subject> 's runway name is `` <object> '' .",
+        "<subject> runway name is <object> .",
+        "<subject> has <object> .",
+        "<subject> runway name is `` <object> '' .",
+        "The runway at <subject> is called `` <object> '' .",
+        "The runway at <subject> is called <object> ."
+    ],
+    "runwaySurfaceType": [
+        "The runway surface at <subject> is made from <object> .",
+        "<subject> runway surface is made of <object> ."
+    ],
+    "season": [
+        "I am interested in the <object> <subject> season .",
+        "<subject> were in the <object> season .",
+        "<subject> competed in the <object> season .",
+        "<subject> played in the <object> season .",
+        "<subject> played in <object> .",
+        "<subject> were in <object> .",
+        "<subject> were in <object> season .",
+        "<subject> play in <object> .",
+        "<subject> was in the <object> season .",
+        "<subject> competed in the season <object> .",
+        "<subject> are in season <object> .",
+        "<subject> played in season <object> .",
+        "<subject> is playing <object> .",
+        "<object> saw <subject> participating .",
+        "<subject> are in <object> .",
+        "<subject> played in <object> season .",
+        "<subject> was in <object> .",
+        "<subject> was a part of the <object> season ."
+    ],
+    "senators": [
+        "The Senator representing <subject> was <object> .",
+        "<object> is a senator in <subject> .",
+        "One of <subject> senators is <object> ."
+    ],
+    "served as Chief of the Astronaut Office in": [
+        "<subject> was the Chief of the Astronaut Office in <object> .",
+        "<subject> served as Chief of the Astronaut Office in <object> ."
+    ],
+    "servingTemperature": [
+        "<subject> can be served <object> .",
+        "<subject> should be served `` <object> '' .",
+        "<subject> is a dish best served <object> .",
+        "<subject> should be served <object> ."
+    ],
+    "significantBuilding": [
+        "<subject> designed significant buildings in <object> .",
+        "<object> is one of <subject> significant buildings .",
+        "One of the significant buildings designed by <subject> is <object> .",
+        "<subject> is the architect behind <object> ."
+    ],
+    "significantProject": [
+        "<object> was a significant project of <subject> .",
+        "<object> was a significant project for <subject> .",
+        "<subject> was the architect of <object> ."
+    ],
+    "similarDish": [
+        "<subject> is a similar dish to <object> .",
+        "<object> are similar to <subject> .",
+        "<subject> is a dish similar to <object> ."
+    ],
+    "spokenIn": [
+        "<subject> is spoken in <object> ."
+    ],
+    "sportsGoverningBody": [
+        "<subject> has a Governing Body called <object> .",
+        "<object> is the Governing Body of the sport of <subject> .",
+        "<object> is the Governing Body for <subject> .",
+        "<object> is the governing body of <subject> .",
+        "<subject> is governed by <object> .",
+        "The sports governing body of <subject> is <object> ."
+    ],
+    "sportsOffered": [
+        "<object> is one of the sports offered at <subject> .",
+        "<subject> offers <object> as a sport .",
+        "One of the sports offered at <subject> is <object> .",
+        "<subject> offers sports including <object> ."
+    ],
+    "starring": [
+        "The starring of <subject> is <object> .",
+        "<object> starred in <subject> .",
+        "<subject> starred <object> .",
+        "The film <subject> stars <object> .",
+        "<object> stared in <subject> .",
+        "<object> , was one of the stars , in <subject> .",
+        "<subject> stars <object> .",
+        "<object> stars in <subject> .",
+        "<subject> <object> ."
+    ],
+    "state": [
+        "<subject> stands in the state of <object> .",
+        "<subject> is located in the state of <object> .",
+        "<subject> is found in <object> .",
+        "<subject> is in the State of <object> .",
+        "<subject> is in <object> state .",
+        "<subject> is located in <object> .",
+        "<subject> is in the state of <object> .",
+        "<subject> is situated in <object> .",
+        "<subject> is located in <object> state .",
+        "<subject> is in <object> ."
+    ],
+    "status": [
+        "<subject> is now <object> .",
+        "<subject> has <object> .",
+        "<subject> is <object> ."
+    ],
+    "tenant": [
+        "The tenant of <subject> is the <object> .",
+        "<object> is a tenant of <subject> .",
+        "<object> is the tenant of <subject> .",
+        "The tenant of <subject> is <object> ."
+    ],
+    "timeInSpace": [
+        "<subject> was in space <object> .",
+        "<subject> 's time in space is <object> .",
+        "<subject> 's time in space amounted to <object> .",
+        "<subject> spent <object> in space .",
+        "<object> is the time <subject> spent in space .",
+        "<subject> spent over <object> !",
+        "<subject> spent a total of <object> in space .",
+        "<subject> spend a total of <object> in space .",
+        "<subject> time in space has been <object> .",
+        "<subject> time in space is <object> .",
+        "<subject> spent <object> in Space .",
+        "<subject> spent just over <object> in space .",
+        "<subject> was in space for <object> .",
+        "<subject> time in space was <object> .",
+        "<object> is the time <subject> spent in Space .",
+        "<subject> walked in space <object> ."
+    ],
+    "title": [
+        "<subject> was <object> .",
+        "<subject> serves as <object> .",
+        "<object> is <subject> .",
+        "<subject> official title is <object> .",
+        "<subject> ' title is <object> .",
+        "<subject> is <object> .",
+        "<subject> served as <object> .",
+        "<subject> performed as <object> .",
+        "<subject> title is <object> ."
+    ],
+    "transportAircraft": [
+        "The transport aircraft for <subject> is <object> .",
+        "<object> is a transport aircraft in <subject> ."
+    ],
+    "voice": [
+        "<object> provides the voice for <subject> .",
+        "<subject> is voiced by <object> .",
+        "<object> does the voice for <subject> ."
+    ],
+    "was a crew member of": [
+        "<subject> was a member of the <object> crew .",
+        "<subject> crewed <object> .",
+        "<subject> was on the crew of <object> .",
+        "<subject> was a crew member of <object> .",
+        "<subject> served as a crew member of <object> .",
+        "<subject> was a crew member on the <object> .",
+        "<subject> was a member of <object> 's crew .",
+        "<subject> was a member of the crew of <object> .",
+        "<subject> was a crew member aboard <object> .",
+        "<subject> was a crew member on <object> .",
+        "<subject> was a part of the crew of <object> .",
+        "<subject> served as a crew member on <object> ."
+    ],
+    "was awarded": [
+        "<subject> was awarded the <object> ribbon .",
+        "<subject> was awarded <object> .",
+        "<subject> was awarded with <object> .",
+        "<subject> won <object> ."
+    ],
+    "was given the 'Technical Campus' status by": [
+        "<object> was proud to give the Technical Campus status to <subject> .",
+        "<subject> was given the Technical Campus status by <object> .",
+        "<subject> was given the ` Technical Campus ' status by <object> ."
+    ],
+    "was selected by NASA": [
+        "<subject> worked for NASA beginning in <object> , .",
+        "<subject> joined NASA in <object> .",
+        "NASA selected <subject> in <object> .",
+        "<subject> was selected by NASA in <object> .",
+        "In <object> , <subject> was selected by NASA .",
+        "<subject> was selected by Nasa in <object> .",
+        "<subject> was hired by NASA in <object> .",
+        "<subject> was chosen by NASA in <object> ."
+    ],
+    "website": [
+        "<subject> has <object> ."
+    ],
+    "year": [
+        "<subject> were introduced in <object> .",
+        "<subject> were invented in <object> ."
+    ],
+    "yearOfConstruction": [
+        "<subject> was constructed in <object> .",
+        "<subject> was built in <object> ."
+    ],
+    "youthclub": [
+        "<subject> played youth football for <object> .",
+        "<subject> is affiliated with <object>"
+    ]
+}
