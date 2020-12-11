@@ -6,7 +6,7 @@ Tested on [WebNLG](https://webnlg-challenge.loria.fr/challenge_2017/) and [E2E](
 
 This code accompanies the following paper:
 
-Ondřej Dušek & Zdeněk Kasner (2020): Evaluating Semantic Accuracy of Data-to-Text Generation with Natural Language Inference. In _Proceedings of INLG_.
+Ondřej Dušek & Zdeněk Kasner (2020): [Evaluating Semantic Accuracy of Data-to-Text Generation with Natural Language Inference](https://www.aclweb.org/anthology/2020.inlg-1.19/). In _Proceedings of INLG_.
 
 Usage
 -----
