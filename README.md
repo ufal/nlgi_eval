@@ -49,6 +49,8 @@ Citing
 	title = {Evaluating {Semantic} {Accuracy} of {Data}-to-{Text} {Generation} with {Natural} {Language} {Inference}},
 	booktitle = {Proceedings of the 13th {International} {Conference} on {Natural} {Language} {Generation} ({INLG} 2020)},
 	author = {Dušek, Ondřej and Kasner, Zdeněk},
+	url = {https://www.aclweb.org/anthology/2020.inlg-1.19},
+	pages = {131--137},
 	month = dec,
 	year = {2020},
 }
