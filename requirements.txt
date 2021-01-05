@@ -2,3 +2,5 @@ transformers
 logzero
 numpy
 pandas
+torch
+scikit-learn
