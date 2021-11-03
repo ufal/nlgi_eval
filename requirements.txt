@@ -1,4 +1,4 @@
-transformers
+transformers==3.0.0
 logzero
 numpy
 pandas
