@@ -25,7 +25,7 @@ Run `./nli_eval.py -h` for a list of available options.
 
 Basic usage (default settings):
 ```
-./nli_eval --type <type> input.tsv output.json
+./nli_eval.py --type <type> input.tsv output.json
 ```
 The type is either `webnlg` or `e2e`, based on the domain of the data.
 
